@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { about, home } from '../data/content'
 import { Card } from '../components/Card'
+import { AssociateBrands } from '../components/AssociateBrands'
 import { Reveal } from '../components/Reveal'
 import { Chip, DashRule, FigureLabel, SectionHeading } from '../components/ui'
 import { ArrowRight, Cpu, Factory, Flask } from '../components/icons'
@@ -100,6 +101,9 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* ---------------- ASSOCIATE BRANDS ---------------- */}
+      <AssociateBrands />
 
       {/* ---------------- LEGACY + CAPABILITIES ---------------- */}
       <section className="bg-warm py-20 sm:py-28">

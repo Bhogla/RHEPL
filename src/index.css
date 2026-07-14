@@ -103,6 +103,53 @@
   .link-action {
     @apply inline-flex items-center gap-2 font-mono text-sm uppercase tracking-chip transition-colors duration-200 ease-out;
   }
+
+  /* ---- Associate-brands logo marquee ---- */
+  /* Edge fade + clipped viewport for the scrolling logo strip. */
+  .brand-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
+  }
+  /* Track holds the logo list twice, back-to-back, so a -50% shift loops seamlessly. */
+  .brand-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: brand-scroll 45s linear infinite;
+  }
+  .brand-marquee__track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes brand-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  /* Reduced motion: no auto-scroll — fall back to a single, manually scrollable row. */
+  @media (prefers-reduced-motion: reduce) {
+    .brand-marquee {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+    .brand-marquee__track {
+      width: auto;
+      animation: none;
+    }
+    .brand-marquee__track [data-marquee-clone] {
+      display: none;
+    }
+  }
 }
 
 @layer utilities {

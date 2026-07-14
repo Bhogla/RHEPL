@@ -283,6 +283,7 @@ export type Product = {
   description?: string // omit where the source site provides no real description
   image?: string // omit to render the datasheet placeholder
   alt?: string
+  slug?: string // when set, the card links to the dedicated /products/[slug] page
 }
 
 export type ProductTab = {
@@ -303,6 +304,7 @@ export const productTabs: ProductTab[] = [
         code: 'RS-1',
         name: 'Rapid Setting Emulsion',
         subtitle: 'For Tack Coat',
+        slug: 'rs-1',
         description:
           "Rapid setting emulsion is a specialized bitumen emulsion designed for tack coat applications. Its quick-setting properties allow rapid bonding between layers of asphalt through a chemical reaction that occurs when the emulsion contacts the aggregate. Tack coat applications — ensuring adhesion between new and existing asphalt layers — require a product that sets quickly to minimize the risk of slippage or unevenness in the finished surface. The rapid setting emulsion's efficiency makes it a popular choice in road construction and maintenance projects.",
         image: '/images/prod-emulsion.jpg',
@@ -317,10 +319,19 @@ export const productTabs: ProductTab[] = [
       },
       {
         code: 'SS-1',
-        name: 'Oil-Based Slow Setting Emulsion',
-        subtitle: 'For Prime Coat',
+        name: 'Slow Setting Emulsion, Grade 1',
+        subtitle: 'For Prime Coat, Fog Seal & Crack Sealing',
+        slug: 'ss-1',
         description:
-          'An oil-based slow-setting emulsion designed for prime coat applications. Formulated using oil as a carrier, it can provide certain advantages in specific conditions — for instance, better resistance to moisture and certain environmental factors. The slower setting time allows deeper penetration into the base material, ensuring strong adhesion between the prime coat and subsequent layers. Oil-based emulsions may have different environmental implications compared to water-based options.',
+          'A slow-setting cationic emulsion formulated to stay workable longer, allowing it to penetrate and wet surfaces thoroughly before it breaks — ideal for prime coats, fog seals and crack sealing.',
+      },
+      {
+        code: 'SS-2',
+        name: 'Slow Setting Emulsion, Grade 2',
+        subtitle: 'For Premix & Slurry Work',
+        slug: 'ss-2',
+        description:
+          'A higher-viscosity slow-set cationic emulsion with more binder than SS-1, built for mixing with graded and fine aggregates — the choice for cold premix, MSS, SDBC and slurry seals.',
       },
       {
         code: 'CME',
@@ -333,6 +344,7 @@ export const productTabs: ProductTab[] = [
         code: 'CQS',
         name: 'Cationic Quick Setting Emulsion',
         subtitle: 'For Microsurfacing Layer',
+        slug: 'cqs-emulsion',
         description:
           'A cationic quick-setting emulsion designed for microsurfacing applications. Its positively charged particles (cations) allow better adhesion to the existing road surface, and its quick-setting properties ensure rapid bonding and minimal disruption to traffic flow during construction. Microsurfacing layers — a thin layer of asphalt, aggregate and polymer — improve road surfaces, enhance skid resistance and extend pavement life.',
       },
@@ -342,6 +354,30 @@ export const productTabs: ProductTab[] = [
         subtitle: 'For Fog Seal & Slurry Seal',
         description:
           "Polymer modified emulsion (PME) incorporates polymeric additives to enhance its performance properties, commonly used in fog seal and slurry seal applications for small maintenance projects. Fog seals apply a thin layer of PME followed by a light sprinkling of aggregate, rejuvenating the existing asphalt and improving skid resistance. Slurry seals apply a thicker PME-aggregate mix for more substantial protection. PME's improved adhesion, durability and resistance to cracking make it ideal for these maintenance applications.",
+      },
+    ],
+  },
+  {
+    id: 'coldmix',
+    label: 'Cold Mix & Repair',
+    intro:
+      'Ready-to-use, all-weather materials laid at ambient temperature — no hot-mix plant, no heating.',
+    products: [
+      {
+        code: 'Coldmix',
+        name: 'Ready-to-Use Cold Mix Asphalt',
+        subtitle: 'IRC:100 / 116-2014',
+        slug: 'coldmix',
+        description:
+          'All-weather, ready-to-lay asphalt that needs no heating — open the bag and go. Stockpile-ready with a long shelf life, ideal for rural roads, remote sites and maintenance crews.',
+      },
+      {
+        code: 'Patch Pro',
+        name: 'Ready-Mix Pothole Repair',
+        subtitle: 'IRC:116-2014',
+        slug: 'patch-pro',
+        description:
+          'Permanent-feel pothole repair in minutes — pour, tamp, and open to traffic. Cold-applied and weather-independent for year-round patching.',
       },
     ],
   },

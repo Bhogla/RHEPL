@@ -6,57 +6,84 @@ import { Tabs, type TabDef } from '../components/Tabs'
 import { Chip, ImagePlaceholder } from '../components/ui'
 import { ArrowRight } from '../components/icons'
 
-function ProductCard({ product, index }: { product: Product; index: number }) {
+function CardInner({ product }: { product: Product }) {
   const hasSpec = Boolean(product.description)
   return (
+    <>
+      <div className="relative aspect-[16/10] overflow-hidden bg-warm">
+        {product.image ? (
+          <img
+            src={product.image}
+            alt={product.alt ?? ''}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
+          />
+        ) : (
+          <ImagePlaceholder tone="warm" className="h-full w-full" />
+        )}
+        <div className="absolute left-3 top-3">
+          <Chip kind="accent" className="bg-white/85 backdrop-blur-sm">
+            {product.code}
+          </Chip>
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-3 p-6">
+        <div>
+          <h3 className="font-display text-2xl font-semibold uppercase leading-none text-ink">
+            {product.name}
+          </h3>
+          {product.subtitle && (
+            <p className="mt-2 font-mono text-xs uppercase tracking-chip text-asphalt">
+              {product.subtitle}
+            </p>
+          )}
+        </div>
+
+        {hasSpec ? (
+          <p className="text-[0.95rem] leading-relaxed text-warm-mute">{product.description}</p>
+        ) : (
+          <div className="mt-1 border border-dashed border-warm-line bg-warm/60 p-4">
+            <p className="font-mono text-xs leading-relaxed text-warm-mute">{specOnRequest}</p>
+            <Link
+              to="/contact"
+              className="link-action mt-3 inline-flex text-ink hover:text-asphalt"
+            >
+              Contact technical team
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        )}
+
+        {product.slug && (
+          <span className="link-action mt-auto pt-2 inline-flex text-ink transition-colors group-hover:text-asphalt">
+            View product
+            <ArrowRight className="h-4 w-4" />
+          </span>
+        )}
+      </div>
+    </>
+  )
+}
+
+function ProductCard({ product, index }: { product: Product; index: number }) {
+  const cardClass =
+    'group flex h-full flex-col overflow-hidden border border-warm-line bg-white transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-ink/30 hover:shadow-lift-warm'
+  return (
     <Reveal delay={(index % 3) * 90}>
-      <article className="group flex h-full flex-col overflow-hidden border border-warm-line bg-white transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-ink/30 hover:shadow-lift-warm">
-        <div className="relative aspect-[16/10] overflow-hidden bg-warm">
-          {product.image ? (
-            <img
-              src={product.image}
-              alt={product.alt ?? ''}
-              loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
-            />
-          ) : (
-            <ImagePlaceholder tone="warm" className="h-full w-full" />
-          )}
-          <div className="absolute left-3 top-3">
-            <Chip kind="accent" className="bg-white/85 backdrop-blur-sm">
-              {product.code}
-            </Chip>
-          </div>
-        </div>
-
-        <div className="flex flex-1 flex-col gap-3 p-6">
-          <div>
-            <h3 className="font-display text-2xl font-semibold uppercase leading-none text-ink">
-              {product.name}
-            </h3>
-            {product.subtitle && (
-              <p className="mt-2 font-mono text-xs uppercase tracking-chip text-asphalt">
-                {product.subtitle}
-              </p>
-            )}
-          </div>
-
-          {hasSpec ? (
-            <p className="text-[0.95rem] leading-relaxed text-warm-mute">{product.description}</p>
-          ) : (
-            <div className="mt-1 border border-dashed border-warm-line bg-warm/60 p-4">
-              <p className="font-mono text-xs leading-relaxed text-warm-mute">{specOnRequest}</p>
-              <Link
-                to="/contact"
-                className="link-action mt-3 inline-flex text-ink hover:text-asphalt"
-              >
-                Contact technical team
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          )}
-        </div>
-      </article>
+      {product.slug ? (
+        <Link
+          to={`/products/${product.slug}`}
+          aria-label={`View ${product.name} product page`}
+          className={`${cardClass} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-asphalt`}
+        >
+          <CardInner product={product} />
+        </Link>
+      ) : (
+        <article className={cardClass}>
+          <CardInner product={product} />
+        </article>
+      )}
     </Reveal>
   )
 }
