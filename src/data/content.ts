@@ -307,8 +307,8 @@ export const productTabs: ProductTab[] = [
         slug: 'rs-1',
         description:
           "Rapid setting emulsion is a specialized bitumen emulsion designed for tack coat applications. Its quick-setting properties allow rapid bonding between layers of asphalt through a chemical reaction that occurs when the emulsion contacts the aggregate. Tack coat applications — ensuring adhesion between new and existing asphalt layers — require a product that sets quickly to minimize the risk of slippage or unevenness in the finished surface. The rapid setting emulsion's efficiency makes it a popular choice in road construction and maintenance projects.",
-        image: '/images/prod-emulsion.jpg',
-        alt: 'Bitumen-sealed road surface detail around a cast manhole cover.',
+        image: '/product/05522981-41DC-43BB-B510-5594E81FDD2B.jpg',
+        alt: 'RS-1 rapid setting cationic bitumen emulsion drum on a road',
       },
       {
         code: 'CSS-1',
@@ -316,6 +316,8 @@ export const productTabs: ProductTab[] = [
         subtitle: 'For Prime Coat',
         description:
           'A water-based slow-setting emulsion designed for prime coat applications. Unlike rapid-setting emulsions, it is formulated to set more slowly, allowing better penetration into the base material. This slower setting time ensures the emulsion effectively bonds with the underlying surface, providing a strong foundation for subsequent layers of asphalt. The water-based nature offers advantages such as reduced environmental impact and improved handling properties.',
+        image: '/product/css1.jpg',
+        alt: 'CSS-1 water-based slow setting bitumen emulsion drum on a road',
       },
       {
         code: 'SS-1',
@@ -324,6 +326,8 @@ export const productTabs: ProductTab[] = [
         slug: 'ss-1',
         description:
           'A slow-setting cationic emulsion formulated to stay workable longer, allowing it to penetrate and wet surfaces thoroughly before it breaks — ideal for prime coats, fog seals and crack sealing.',
+        image: '/product/486D2DA2-BF0A-40B4-90AE-F33D7091D067.jpg',
+        alt: 'SS-1 slow setting cationic bitumen emulsion drums on a road',
       },
       {
         code: 'SS-2',
@@ -332,6 +336,8 @@ export const productTabs: ProductTab[] = [
         slug: 'ss-2',
         description:
           'A higher-viscosity slow-set cationic emulsion with more binder than SS-1, built for mixing with graded and fine aggregates — the choice for cold premix, MSS, SDBC and slurry seals.',
+        image: '/product/E0F03CFF-AF0D-441F-B643-2CF85402F510.jpg',
+        alt: 'SS-2 slow setting cationic bitumen emulsion drum on a road',
       },
       {
         code: 'CME',
@@ -339,6 +345,8 @@ export const productTabs: ProductTab[] = [
         subtitle: 'For Construction of Rural Roads',
         description:
           'A cold mix emulsion designed for the construction of rural roads. It offers several advantages over traditional hot mix asphalt, including lower energy consumption, reduced emissions, and easier handling. Cold mix emulsions can be mixed with aggregate at ambient temperatures, eliminating the need for costly heating equipment — particularly suitable for rural areas where infrastructure and resources may be limited, allowing faster construction times and reduced disruption to local communities.',
+        image: '/product/cme.jpg',
+        alt: 'CME cold mix bitumen emulsion drum on a road',
       },
       {
         code: 'CQS',
@@ -347,6 +355,8 @@ export const productTabs: ProductTab[] = [
         slug: 'cqs-emulsion',
         description:
           'A cationic quick-setting emulsion designed for microsurfacing applications. Its positively charged particles (cations) allow better adhesion to the existing road surface, and its quick-setting properties ensure rapid bonding and minimal disruption to traffic flow during construction. Microsurfacing layers — a thin layer of asphalt, aggregate and polymer — improve road surfaces, enhance skid resistance and extend pavement life.',
+        image: '/product/5830D47A-EEF8-43D2-9EE8-37E88C3E2742.jpg',
+        alt: 'CQS cationic quick-setting bitumen emulsion drum on a road',
       },
       {
         code: 'PME',
@@ -354,6 +364,8 @@ export const productTabs: ProductTab[] = [
         subtitle: 'For Fog Seal & Slurry Seal',
         description:
           "Polymer modified emulsion (PME) incorporates polymeric additives to enhance its performance properties, commonly used in fog seal and slurry seal applications for small maintenance projects. Fog seals apply a thin layer of PME followed by a light sprinkling of aggregate, rejuvenating the existing asphalt and improving skid resistance. Slurry seals apply a thicker PME-aggregate mix for more substantial protection. PME's improved adhesion, durability and resistance to cracking make it ideal for these maintenance applications.",
+        image: '/product/pme.jpg',
+        alt: 'PME polymer modified bitumen emulsion drum on a road',
       },
     ],
   },
@@ -370,6 +382,8 @@ export const productTabs: ProductTab[] = [
         slug: 'coldmix',
         description:
           'All-weather, ready-to-lay asphalt that needs no heating — open the bag and go. Stockpile-ready with a long shelf life, ideal for rural roads, remote sites and maintenance crews.',
+        image: '/product/3211FD90-3C66-4164-9C86-A21562219CA7.jpg',
+        alt: 'Coldmix ready-to-use cold mix asphalt in a bag on a rural road',
       },
       {
         code: 'Patch Pro',
@@ -378,6 +392,8 @@ export const productTabs: ProductTab[] = [
         slug: 'patch-pro',
         description:
           'Permanent-feel pothole repair in minutes — pour, tamp, and open to traffic. Cold-applied and weather-independent for year-round patching.',
+        image: '/product/515C8431-CDA9-4597-AB05-F2F89734A9A9.jpg',
+        alt: 'Patch Pro cold-mix pothole repair being poured into a pothole',
       },
     ],
   },
@@ -391,16 +407,22 @@ export const productTabs: ProductTab[] = [
         name: 'Polymer Modified Bitumen',
         subtitle: 'High Temperature Grade',
         // No further description on the source site — gap-handling rule applies.
+        image: '/product/CAD7F274-C99D-444D-B351-493C5AD69267.jpg',
+        alt: 'PMB polymer modified bitumen pouring from a plant spout',
       },
       {
         code: 'PMB 70',
         name: 'Polymer Modified Bitumen 70',
         subtitle: 'Low Temperature Grade',
+        image: '/product/EE17E8CD-A7D5-4250-AD96-215CBB923A38.jpg',
+        alt: 'PMB 70 polymer modified bitumen drum on a pallet at a plant',
       },
       {
         code: 'CRMB 50 / 55 / 60',
         name: 'Crumb Rubber Modified Bitumen',
         subtitle: 'As per customer needs — matching IRC & IS standards',
+        image: '/product/59A612DB-A677-4813-A089-393FED30EF06.jpg',
+        alt: 'CRMB crumb rubber modified bitumen being blended in a vessel',
       },
     ],
   },
@@ -413,6 +435,8 @@ export const productTabs: ProductTab[] = [
         code: 'RAP',
         name: 'Recycled Asphalt Pavement (RAP) Rejuvenator',
         // Title only on the source site — gap-handling rule applies.
+        image: '/product/023B8262-C8DF-43DE-AD97-9591F360E832.jpg',
+        alt: 'RAP rejuvenator oil poured over recycled asphalt granules',
       },
     ],
   },

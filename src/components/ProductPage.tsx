@@ -28,7 +28,7 @@ function usePageMeta(title: string, description: string) {
  * file isn't there yet it falls back to a labelled placeholder in the SAME box, so
  * dropping the file in later shows it with no layout shift.
  */
-function ProductImage({ src, code }: { src: string; code: string }) {
+function ProductImage({ src, code, alt }: { src: string; code: string; alt?: string }) {
   const [failed, setFailed] = useState(false)
 
   return (
@@ -36,7 +36,7 @@ function ProductImage({ src, code }: { src: string; code: string }) {
       {!failed && (
         <img
           src={src}
-          alt={`${code} product`}
+          alt={alt ?? `${code} product`}
           onError={() => setFailed(true)}
           className="absolute inset-0 h-full w-full object-contain p-6"
         />
@@ -138,7 +138,7 @@ export function ProductPage() {
 
   if (!product) return <NotFound />
 
-  const { code, name, category, tagline, overview, advantages, applications, specRef, specs, note, image } =
+  const { code, name, category, tagline, overview, advantages, applications, specRef, specs, note, image, alt } =
     product
 
   return (
@@ -192,7 +192,7 @@ export function ProductPage() {
             </div>
 
             <Reveal delay={120} className="lg:pt-1">
-              <ProductImage src={image} code={code} />
+              <ProductImage src={image} code={code} alt={alt} />
             </Reveal>
           </div>
         </div>

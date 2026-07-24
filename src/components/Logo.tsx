@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 /**
- * Drop the official Roadtech logo file in at this path to use it everywhere.
- * Save it as `public/logo.svg` (or change to '/logo.png' if you export a PNG).
- * Use a transparent-background, light/white version so it reads on the dark header.
+ * The official Roadtech logo — the single-line lockup (mark + wordmark +
+ * "We Make The Way" tagline), white on transparent so it reads on the dark header.
+ * Master copy lives in /Media/logo.png; copy it to public/ to publish a new version.
  * Until the file exists, the header falls back to the recreated SVG mark below.
  */
 const LOGO_SRC = '/logo.png'
@@ -64,10 +64,12 @@ export function Logo({ onClick }: { onClick?: () => void }) {
           </span>
         </>
       ) : (
+        /* The PNG carries ~20% transparent padding top/bottom, so the box is set
+           taller than the intended optical height to compensate. */
         <img
           src={LOGO_SRC}
           alt="Roadtech Asphalt Technologies — We Make The Way"
-          className="h-10 w-auto object-contain sm:h-12"
+          className="h-12 w-auto object-contain sm:h-14"
           onError={() => setUseFallback(true)}
         />
       )}

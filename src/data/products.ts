@@ -18,6 +18,7 @@ export type ProductPage = {
   specs: Spec[]
   note?: string // small italic note under the spec table
   image: string // expected image path; file may not exist yet (placeholder renders until it does)
+  alt?: string // meaningful alt text for the product image; shared with the matching card
 }
 
 export const products: ProductPage[] = [
@@ -46,7 +47,8 @@ export const products: ProductPage[] = [
       { label: 'Ductility, 27 °C (cm, min)', value: '50' },
       { label: 'Solubility in trichloroethylene (%, min)', value: '98' },
     ],
-    image: '/products/rs-1.jpg',
+    image: '/product/05522981-41DC-43BB-B510-5594E81FDD2B.jpg',
+    alt: 'RS-1 rapid setting cationic bitumen emulsion drum on a road',
   },
   {
     slug: 'ss-1',
@@ -73,7 +75,8 @@ export const products: ProductPage[] = [
       { label: 'Ductility, 27 °C (cm, min)', value: '50' },
       { label: 'Solubility in trichloroethylene (%, min)', value: '98' },
     ],
-    image: '/products/ss-1.jpg',
+    image: '/product/486D2DA2-BF0A-40B4-90AE-F33D7091D067.jpg',
+    alt: 'SS-1 slow setting cationic bitumen emulsion drums on a road',
   },
   {
     slug: 'ss-2',
@@ -102,7 +105,8 @@ export const products: ProductPage[] = [
       { label: 'Ductility, 27 °C (cm, min)', value: '50' },
       { label: 'Solubility in trichloroethylene (%, min)', value: '98' },
     ],
-    image: '/products/ss-2.jpg',
+    image: '/product/E0F03CFF-AF0D-441F-B643-2CF85402F510.jpg',
+    alt: 'SS-2 slow setting cationic bitumen emulsion drum on a road',
   },
   {
     slug: 'cqs-emulsion',
@@ -129,7 +133,8 @@ export const products: ProductPage[] = [
       { label: 'Softening point of residue (°C, min)', value: '57' },
     ],
     note: 'Micro-surfacing grades are typically polymer/latex modified per project specification.',
-    image: '/products/cqs-emulsion.jpg',
+    image: '/product/5830D47A-EEF8-43D2-9EE8-37E88C3E2742.jpg',
+    alt: 'CQS cationic quick-setting bitumen emulsion drum on a road',
   },
   {
     slug: 'coldmix',
@@ -159,7 +164,8 @@ export const products: ProductPage[] = [
       { label: 'Storage life', value: 'Minimum ~6 months' },
       { label: 'Packaging', value: 'Plastic-lined / laminated bags (typically 50 kg)' },
     ],
-    image: '/products/coldmix.jpg',
+    image: '/product/3211FD90-3C66-4164-9C86-A21562219CA7.jpg',
+    alt: 'Coldmix ready-to-use cold mix asphalt in a bag on a rural road',
   },
   {
     slug: 'patch-pro',
@@ -190,7 +196,8 @@ export const products: ProductPage[] = [
       { label: 'Packaging', value: 'Airtight double-laminated bags' },
       { label: 'Coverage', value: '~one 50 kg bag per 2/3 cu ft of pothole volume' },
     ],
-    image: '/products/patch-pro.jpg',
+    image: '/product/515C8431-CDA9-4597-AB05-F2F89734A9A9.jpg',
+    alt: 'Patch Pro cold-mix pothole repair being poured into a pothole',
   },
 ]
 
