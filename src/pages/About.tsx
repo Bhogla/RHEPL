@@ -5,11 +5,58 @@ import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
 import { Chip, DashRule, FigureLabel, SectionHeading } from '../components/ui'
 import { ArrowRight, Handshake, ShieldCheck, Users } from '../components/icons'
+import guptaPhoto from '../assets/directors/gupta.png'
+import sharawatPhoto from '../assets/directors/sharawat.png'
 
 const pillars = [
   { icon: ShieldCheck, title: 'Integrity & Safety', body: 'Strict protocols and stringent quality control at every stage.' },
   { icon: Handshake, title: 'Collaboration', body: 'Working closely with promoters, customers and stakeholders.' },
   { icon: Users, title: 'Customer-Centricity', body: 'Technical services that maximise the life of every laid metre.' },
+]
+
+const directors = [
+  {
+    first: 'Mr. Dherandra',
+    last: 'Sharawat',
+    // Mono record tag — carries the remit, not a decorative index
+    tag: 'DIRECTOR :: PRODUCT & TECHNICAL',
+    photo: sharawatPhoto,
+    alt: 'Dherandra Sharawat, Director, Roadtech Asphalt Technologies',
+    // Each cutout sits hard against one side of its 16:9 frame (measured alpha
+    // bbox: Sharawat 0.00–0.66, Gupta 0.31–0.98). Pin the cover window to that
+    // side so the figure lands centred and nothing gets clipped.
+    focus: 'left center',
+    // pool of light behind the figure, matching the reference's warm halo
+    glow: 'radial-gradient(46% 44% at 44% 52%, rgba(232,93,45,0.13) 0%, rgba(232,93,45,0.04) 45%, rgba(232,93,45,0) 72%)',
+    flip: false,
+    bio: [
+      'Dherandra Sharawat is the driving force behind Roadtech Asphalt Technologies Pvt. Ltd., bringing years of expertise in road construction materials and infrastructure solutions. His vision of delivering innovative, high-quality, and sustainable products has positioned the company as a trusted partner for government agencies, contractors, and infrastructure developers across India.',
+      'Known for his strategic leadership and commitment to excellence, he continuously drives innovation, operational efficiency, and customer satisfaction while building a strong foundation for long-term growth.',
+    ],
+    // Compressed from the bio above — no facts added
+    fields: [
+      { label: 'Remit', value: 'Product direction & technical quality' },
+      { label: 'Drives', value: 'Innovation · Operational efficiency · Customer satisfaction' },
+    ],
+  },
+  {
+    first: 'Mr. Tarun',
+    last: 'Gupta',
+    tag: 'DIRECTOR :: GROWTH & OPERATIONS',
+    photo: guptaPhoto,
+    alt: 'Tarun Gupta, Director, Roadtech Asphalt Technologies',
+    focus: 'right center',
+    glow: 'radial-gradient(46% 44% at 53% 56%, rgba(232,93,45,0.13) 0%, rgba(232,93,45,0.04) 45%, rgba(232,93,45,0) 72%)',
+    flip: true,
+    bio: [
+      "Tarun Gupta plays a pivotal role in shaping the company's growth through strategic planning, business development, and operational excellence. With a strong understanding of the infrastructure sector, he has been instrumental in expanding Roadtech's presence across multiple states while fostering lasting relationships with clients and partners.",
+      "His forward-thinking approach, combined with a focus on quality and innovation, ensures that every project reflects the company's commitment to reliability and engineering excellence.",
+    ],
+    fields: [
+      { label: 'Remit', value: 'Growth, partnerships & operations' },
+      { label: 'Drives', value: 'Strategic planning · Business development · Multi-state reach' },
+    ],
+  },
 ]
 
 export function About() {
@@ -95,12 +142,81 @@ export function About() {
         </div>
       </section>
 
+      {/* Leadership (dark) */}
+      <section className="border-t border-ink-line bg-ink py-20 sm:py-24">
+        <div className="shell">
+          <Reveal>
+            <SectionHeading
+              figure="FIG. 04 :: LEADERSHIP"
+              title="The people accountable for it"
+              tone="dark"
+              intro="Two directors, both hands-on — one on what we make, one on where it goes."
+            />
+          </Reveal>
+
+          <div className="mt-14 flex flex-col gap-14 sm:gap-16">
+            {directors.map((d, i) => (
+              <Reveal key={d.last} delay={i * 200}>
+                <article
+                  className={`grid items-center gap-8 lg:gap-16 ${
+                    i > 0 ? 'border-t border-ink-line pt-14 sm:pt-16' : ''
+                  } ${d.flip ? 'lg:grid-cols-[1.1fr_0.9fr]' : 'lg:grid-cols-[0.9fr_1.1fr]'}`}
+                >
+                  {/* The figure dissolves into the field and stands on a road marking */}
+                  <div className={`relative ${d.flip ? 'lg:order-2' : ''}`}>
+                    <div
+                      aria-hidden
+                      className="absolute inset-0"
+                      style={{ background: d.glow }}
+                    />
+                    <img
+                      src={d.photo}
+                      alt={d.alt}
+                      loading="lazy"
+                      decoding="async"
+                      style={{ objectPosition: d.focus }}
+                      className="portrait-blend relative aspect-[4/3] w-full object-cover"
+                    />
+                    <DashRule className="absolute inset-x-[8%] bottom-0 opacity-55" />
+                  </div>
+
+                  <div className={d.flip ? 'lg:order-1' : ''}>
+                    <FigureLabel>{d.tag}</FigureLabel>
+
+                    <h3 className="mt-4 font-display text-[2rem] font-semibold uppercase leading-[1.05] tracking-[-0.015em] text-warm sm:text-5xl">
+                      {d.first} {d.last}
+                    </h3>
+
+                    <div className="mt-7 max-w-prose space-y-5 leading-relaxed text-aggregate">
+                      {d.bio.map((p, j) => (
+                        <p key={j}>{p}</p>
+                      ))}
+                    </div>
+
+                    <dl className="mt-8 grid gap-x-10 gap-y-5 border-t border-ink-line pt-6 sm:grid-cols-2">
+                      {d.fields.map((f) => (
+                        <div key={f.label} className="flex flex-col gap-1.5">
+                          <dt className="font-mono text-[0.68rem] uppercase tracking-label text-aggregate">
+                            {f.label}
+                          </dt>
+                          <dd className="text-[0.95rem] leading-snug text-warm">{f.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="bg-warm py-20 sm:py-28">
         <div className="shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <Reveal>
             <div className="lg:sticky lg:top-28">
-              <FigureLabel>FIG. 04 :: GENERAL GUIDANCE</FigureLabel>
+              <FigureLabel>FIG. 05 :: GENERAL GUIDANCE</FigureLabel>
               <h2 className="mt-4 font-display text-display-md font-semibold uppercase text-ink">
                 {about.faq.heading}
               </h2>

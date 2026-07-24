@@ -83,6 +83,18 @@
     width: 100%;
   }
 
+  /* Portrait dissolve — cutout figures merge into the dark field instead of
+     sitting in a visible box. Bottom fades into the road line; sides fade so
+     the object-cover crop never shows a hard edge. */
+  .portrait-blend {
+    -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%),
+      linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to bottom, #000 80%, transparent 100%),
+      linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+    mask-composite: intersect;
+  }
+
   /* Container */
   .shell {
     width: 100%;
