@@ -4,6 +4,7 @@ import { about, home } from '../data/content'
 import { Card } from '../components/Card'
 import { AssociateBrands } from '../components/AssociateBrands'
 import { Reveal } from '../components/Reveal'
+import { Modal } from '../components/Modal'
 import { Chip, DashRule, FigureLabel, SectionHeading } from '../components/ui'
 import { ArrowRight, Cpu, Factory, Flask } from '../components/icons'
 
@@ -13,6 +14,8 @@ export function Home() {
   const [videoReady, setVideoReady] = useState(false)
   const [showFallback, setShowFallback] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [manuOpen, setManuOpen] = useState(false)
+  const manuBtnRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     // Check if video is already playing / loaded (e.g. from browser cache)
@@ -151,26 +154,76 @@ export function Home() {
           <ul className="grid gap-px overflow-hidden border border-warm-line bg-warm-line sm:grid-cols-3">
             {home.capabilities.map((cap, i) => {
               const Icon = capIcons[i]
+              const isManufacturing = cap.code === 'CAP-01'
+              const content = (
+                <>
+                  <div className="flex items-center justify-between">
+                    <Icon className="h-9 w-9 text-asphalt" />
+                    <span className="font-mono text-xs tracking-chip text-aggregate">
+                      {cap.code}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-2xl font-semibold uppercase text-ink">
+                    {cap.title}
+                  </h3>
+                  <p className="text-[0.95rem] leading-relaxed text-warm-mute">{cap.body}</p>
+                  {isManufacturing && (
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-1 font-mono text-xs uppercase tracking-chip text-asphalt">
+                      {home.manufacturingUnits.hint}
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-200 ease-out group-hover:translate-x-1" />
+                    </span>
+                  )}
+                </>
+              )
               return (
                 <Reveal as="li" delay={i * 90} key={cap.code} className="bg-warm">
-                  <div className="flex h-full flex-col gap-4 p-7 lg:p-8">
-                    <div className="flex items-center justify-between">
-                      <Icon className="h-9 w-9 text-asphalt" />
-                      <span className="font-mono text-xs tracking-chip text-aggregate">
-                        {cap.code}
-                      </span>
-                    </div>
-                    <h3 className="font-display text-2xl font-semibold uppercase text-ink">
-                      {cap.title}
-                    </h3>
-                    <p className="text-[0.95rem] leading-relaxed text-warm-mute">{cap.body}</p>
-                  </div>
+                  {isManufacturing ? (
+                    <button
+                      ref={manuBtnRef}
+                      type="button"
+                      onClick={() => setManuOpen(true)}
+                      aria-haspopup="dialog"
+                      className="group flex h-full w-full cursor-pointer flex-col gap-4 p-7 text-left transition-colors duration-200 ease-out hover:bg-asphalt/[0.06] focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-asphalt lg:p-8"
+                    >
+                      {content}
+                    </button>
+                  ) : (
+                    <div className="flex h-full flex-col gap-4 p-7 lg:p-8">{content}</div>
+                  )}
                 </Reveal>
               )
             })}
           </ul>
         </div>
       </section>
+
+      {/* Manufacturing Units modal (opened only by the CAP-01 card) */}
+      <Modal
+        open={manuOpen}
+        onClose={() => setManuOpen(false)}
+        returnFocusRef={manuBtnRef}
+        eyebrow={home.manufacturingUnits.eyebrow}
+        title={home.manufacturingUnits.title}
+      >
+        <ul className="border-t border-ink-line">
+          {home.manufacturingUnits.locations.map((loc, i) => (
+            <li
+              key={loc.city}
+              className="flex items-start justify-between gap-4 border-b border-ink-line py-4"
+            >
+              <div>
+                <p className="font-display text-2xl font-semibold uppercase leading-none text-warm">
+                  {loc.city}
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-aggregate">{loc.line}</p>
+              </div>
+              <span className="shrink-0 font-mono text-xs tracking-chip text-asphalt">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Modal>
 
       {/* ---------------- STAT BANNER ---------------- */}
       <section className="relative isolate overflow-hidden bg-ink py-20 sm:py-24">

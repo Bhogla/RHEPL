@@ -30,7 +30,7 @@ function BrandChip({ brand }: { brand: Brand }) {
       src={brand.src}
       alt={brand.alt}
       loading="lazy"
-      className="h-10 w-auto max-w-[160px] object-contain transition-transform duration-300 ease-out hover:scale-105 sm:h-12"
+      className="h-[3.75rem] w-auto max-w-[240px] object-contain transition-transform duration-300 ease-out hover:scale-105 sm:h-[4.5rem]"
     />
   )
 }
@@ -89,8 +89,7 @@ export function AssociateBrands() {
         {/* Stat line */}
         <Reveal delay={200}>
           <p className="mt-6 text-center font-mono text-xs uppercase tracking-chip text-aggregate">
-            {brands.length} partner organisations across highways, state road authorities &amp;
-            material supply
+            Trusted partner organisations across highways
           </p>
         </Reveal>
       </div>

@@ -77,6 +77,18 @@ export const home = {
       body: 'Our research and development centre uses cutting-edge technology and is staffed with experienced professionals dedicated to creating innovative solutions.',
     },
   ],
+  // Manufacturing locations shown in the "Manufacturing Units" card modal.
+  // Edit this list to add / change a plant; the card hint + modal follow automatically.
+  manufacturingUnits: {
+    eyebrow: 'CAP-01 :: MANUFACTURING UNITS',
+    title: 'Manufacturing Units',
+    hint: '3 locations',
+    locations: [
+      { city: 'Haridwar', line: 'Uttarakhand · Bitumen emulsions & modified bitumen' },
+      { city: 'Mathura', line: 'Uttar Pradesh · Cold-mix & emulsion production' },
+      { city: 'Saharanpur', line: 'Uttar Pradesh · Primary plant & registered operations' },
+    ],
+  },
   stat: {
     value: '1 Million+',
     unit: 'sq. metres',
@@ -215,6 +227,7 @@ export const about = {
     { label: 'ISO Certified', kind: 'cert' as const },
     { label: 'MSME Registered', kind: 'cert' as const },
     { label: 'IIA Member', kind: 'cert' as const },
+    { label: 'BIS Certified', kind: 'cert' as const },
     { label: 'Est. 2020', kind: 'default' as const },
   ],
   faq: {
