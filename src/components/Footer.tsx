@@ -36,9 +36,17 @@ export function Footer() {
 
         <DashRule className="my-8 opacity-80" />
 
-        <dl className="grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="grid grid-cols-1 gap-x-10 gap-y-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           <Field label="Plant Address">{contact.plantAddress}</Field>
-          <Field label="Registered Address">{contact.registeredAddress}</Field>
+          <Field label="Corporate Office">
+            {contact.registeredAddress.split('\n').map((line, i, arr) => (
+              <span key={i}>
+                {line}
+                {i < arr.length - 1 && <br />}
+              </span>
+            ))}
+          </Field>
+          <Field label="Registered Office">{contact.registeredAddressNoida}</Field>
           <Field label="Working Hours">
             {contact.workingHours}
             <br />
@@ -47,23 +55,23 @@ export function Footer() {
           <Field label="Contact">
             <a
               href={`tel:${contact.phoneHref}`}
-              className="flex items-center gap-2 transition-colors hover:text-asphalt"
+              className="flex items-center gap-2 whitespace-nowrap transition-colors hover:text-asphalt"
             >
-              <Phone className="h-3.5 w-3.5 text-aggregate" />
+              <Phone className="h-3.5 w-3.5 shrink-0 text-aggregate" />
               {contact.phoneDisplay}
             </a>
             <a
               href={`mailto:${contact.emailGeneral}`}
-              className="mt-1 flex items-center gap-2 transition-colors hover:text-asphalt"
+              className="mt-1 flex items-center gap-2 whitespace-nowrap transition-colors hover:text-asphalt"
             >
-              <Mail className="h-3.5 w-3.5 text-aggregate" />
+              <Mail className="h-3.5 w-3.5 shrink-0 text-aggregate" />
               {contact.emailGeneral}
             </a>
             <a
               href={`mailto:${contact.emailSales}`}
-              className="mt-1 flex items-center gap-2 transition-colors hover:text-asphalt"
+              className="mt-1 flex items-center gap-2 whitespace-nowrap transition-colors hover:text-asphalt"
             >
-              <Mail className="h-3.5 w-3.5 text-aggregate" />
+              <Mail className="h-3.5 w-3.5 shrink-0 text-aggregate" />
               {contact.emailSales}
             </a>
           </Field>

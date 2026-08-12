@@ -40,26 +40,26 @@ function CardInner({ product }: { product: Product }) {
           )}
         </div>
 
-        {hasSpec ? (
-          <p className="text-[0.95rem] leading-relaxed text-warm-mute">{product.description}</p>
-        ) : (
-          <div className="mt-1 border border-dashed border-warm-line bg-warm/60 p-4">
-            <p className="font-mono text-xs leading-relaxed text-warm-mute">{specOnRequest}</p>
-            <Link
-              to="/contact"
-              className="link-action mt-3 inline-flex text-ink hover:text-asphalt"
-            >
-              Contact technical team
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        )}
+        <p className="text-[0.95rem] leading-relaxed text-warm-mute">
+          {product.description ?? product.contactNote ?? specOnRequest}
+        </p>
 
-        {product.slug && (
+        {/* Bottom action, pinned so it aligns across every card in a row. */}
+        {product.slug ? (
           <span className="link-action mt-auto pt-2 inline-flex text-ink transition-colors group-hover:text-asphalt">
             View product
             <ArrowRight className="h-4 w-4" />
           </span>
+        ) : (
+          !hasSpec && (
+            <Link
+              to="/contact"
+              className="link-action mt-auto pt-2 inline-flex text-ink transition-colors hover:text-asphalt"
+            >
+              Contact technical team
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          )
         )}
       </div>
     </>

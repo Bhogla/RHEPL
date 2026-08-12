@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { about, home } from '../data/content'
 import { Card } from '../components/Card'
 import { AssociateBrands } from '../components/AssociateBrands'
+import { HeroVideo } from '../components/HeroVideo'
 import { Reveal } from '../components/Reveal'
 import { Modal } from '../components/Modal'
 import { Chip, DashRule, FigureLabel, SectionHeading } from '../components/ui'
@@ -11,54 +12,19 @@ import { ArrowRight, Cpu, Factory, Flask } from '../components/icons'
 const capIcons = [Factory, Flask, Cpu]
 
 export function Home() {
-  const [videoReady, setVideoReady] = useState(false)
-  const [showFallback, setShowFallback] = useState(false)
-  const videoRef = useRef<HTMLVideoElement>(null)
   const [manuOpen, setManuOpen] = useState(false)
   const manuBtnRef = useRef<HTMLButtonElement>(null)
-
-  useEffect(() => {
-    // Check if video is already playing / loaded (e.g. from browser cache)
-    const video = videoRef.current
-    if (video) {
-      if (video.readyState >= 3 && !video.paused) {
-        setVideoReady(true)
-      }
-    }
-
-    // Set a timeout of 2 seconds to show the fallback image if the video hasn't loaded/played
-    const timer = setTimeout(() => {
-      setShowFallback(true)
-    }, 2000)
-
-    return () => clearTimeout(timer)
-  }, [])
 
   return (
     <>
       {/* ---------------- HERO ---------------- */}
       <section className="relative isolate flex min-h-[clamp(34rem,82vh,46rem)] items-center overflow-hidden bg-ink">
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
-          onPlay={() => setVideoReady(true)}
-          className={`absolute inset-0 -z-10 h-full w-full object-cover object-center transition-opacity duration-1000 ${
-            videoReady ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-
-        <img
-          src="/images/hero-highway.jpg"
+        <HeroVideo
+          src="/hero.mp4"
+          poster="/images/hero-highway.jpg"
           alt="National Highway 11 in Rajasthan, India, with an overhead green direction sign to Dausa, Agra and Ajmer."
-          className={`absolute inset-0 -z-20 h-full w-full object-cover object-center transition-opacity duration-1000 ${
-            showFallback && !videoReady ? 'opacity-100' : 'opacity-0'
-          }`}
         />
+
         <div className="absolute inset-0 -z-10 bg-hero-veil" />
         <div className="absolute inset-0 -z-10 bg-hero-veil-b sm:hidden" />
 
@@ -303,6 +269,11 @@ export function Home() {
               </Reveal>
             ))}
           </div>
+          <Reveal>
+            <p className="mt-10 max-w-3xl text-sm leading-relaxed text-warm/70">
+              {home.servicesPreview.note}
+            </p>
+          </Reveal>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
 // --- Product info pages -------------------------------------------------
 // Copy and specs are taken verbatim from the approved product content sheet
-// (RS-1, SS-1, SS-2, CQS Emulsion, Coldmix, Patch Pro). Do not paraphrase the
+// (RS-1, SS-1, SS-2, CQS Emulsion, Patch Pro, plus the Bitumen grade pages). Do not paraphrase the
 // specs. Edit a product here and its /products/[slug] page updates automatically.
 
 export type Spec = { label: string; value: string }
@@ -137,37 +137,6 @@ export const products: ProductPage[] = [
     alt: 'CQS cationic quick-setting bitumen emulsion drum on a road',
   },
   {
-    slug: 'coldmix',
-    code: 'Coldmix',
-    name: 'Ready-to-Use Cold Mix Asphalt',
-    category: 'Cold Mix Asphalt · As per IRC:100-2014 / IRC:116-2014',
-    tagline: 'All-weather, ready-to-lay asphalt that needs no heating — open the bag and go.',
-    overview:
-      'Coldmix is a ready-made bituminous mix of clean graded aggregate and specially formulated bitumen emulsion (or cutback), designed to be laid at ambient temperature — no hot-mix plant, no heating, no specialised equipment. It looks and performs like hot-mix asphalt but can be stockpiled and used whenever needed, including during the monsoon and cold winter months when conventional hot-mix work stops. That weather-independence and long shelf life make it ideal for rural roads, remote sites, and maintenance crews.',
-    advantages: [
-      'Weather-independent — usable in rain and cold',
-      'No heating or specialised plant required',
-      'Stockpile-ready with a long storage life',
-      'Energy-efficient and lower-emission than hot mix',
-    ],
-    applications: [
-      'Surface patching and road maintenance',
-      'Rural and low-volume road construction',
-      'Utility-cut reinstatement',
-      'Remote locations without hot-mix access',
-    ],
-    specRef: 'Technical Characteristics (IRC:100/116-2014)',
-    specs: [
-      { label: 'Binder type', value: 'Bitumen emulsion / cutback bitumen' },
-      { label: 'Application temperature', value: 'Ambient (no heating)' },
-      { label: 'Aggregate', value: 'Clean, graded; dust (passing 0.075 mm) ≤ 2%' },
-      { label: 'Storage life', value: 'Minimum ~6 months' },
-      { label: 'Packaging', value: 'Plastic-lined / laminated bags (typically 50 kg)' },
-    ],
-    image: '/product/3211FD90-3C66-4164-9C86-A21562219CA7.jpg',
-    alt: 'Coldmix ready-to-use cold mix asphalt in a bag on a rural road',
-  },
-  {
     slug: 'patch-pro',
     code: 'Patch Pro',
     name: 'Ready-Mix Pothole Repair',
@@ -198,6 +167,79 @@ export const products: ProductPage[] = [
     ],
     image: '/product/515C8431-CDA9-4597-AB05-F2F89734A9A9.jpg',
     alt: 'Patch Pro cold-mix pothole repair being poured into a pothole',
+  },
+  {
+    slug: 'bitumen',
+    code: 'Bitumen',
+    name: 'Viscosity Grade Bitumen (VG-10 / VG-30 / VG-40)',
+    category: 'Viscosity Grade Bitumen · VG-10 / VG-30 / VG-40',
+    tagline: 'Different viscosity grades of bitumen to match your terrain, temperature and traffic.',
+    overview:
+      'Roadtech supplies different viscosity grades of bitumen, selected to suit the terrain, temperature and traffic each road has to carry. We supply imported Bitumen with high quality standards on demand.',
+    applications: [
+      'Hot-mix asphalt and premix carpet production',
+      'Bituminous road surfacing and paving',
+      'Grade-specific selection for varying climate conditions',
+    ],
+    // Grades table (adapted from the lab-spec table used by the emulsion pages).
+    specRef: 'Available Grades',
+    specs: [
+      { label: 'VG-10', value: 'For High Altitude Terrains' },
+      { label: 'VG-30', value: 'For Moderate Temperature' },
+      { label: 'VG-40', value: 'As per Demand' },
+    ],
+    image: '/product/CAD7F274-C99D-444D-B351-493C5AD69267.jpg',
+    alt: 'Bitumen pouring from a plant spout',
+  },
+  {
+    slug: 'polymer-modified-bitumen',
+    code: 'Polymer Modified Bitumen',
+    name: 'PMB 64-10 / 70-10 / 76-10 / 82-10 / 76-22',
+    category: 'Polymer Modified Bitumen · As per IRC & IS Standards',
+    tagline: 'Polymer modified bitumen supplied as per customer needs, matching IRC and IS standards.',
+    overview:
+      'Roadtech supplies Polymer Modified Bitumen (PMB) as per customer needs, matching IRC and IS standards. PMB improves a binder’s resistance to rutting, fatigue and temperature extremes, making it well suited to heavily trafficked highways, expressways and demanding surface conditions.',
+    applications: [
+      'High-traffic highways and expressways',
+      'Heavy-duty and high-temperature pavements',
+      'Rut-resistant and stress-absorbing surface layers',
+    ],
+    // Grades table (adapted from the lab-spec table used by the emulsion pages).
+    specRef: 'Available Grades',
+    specs: [
+      { label: 'PMB 64-10', value: 'As per customer needs' },
+      { label: 'PMB 70-10', value: 'As per customer needs' },
+      { label: 'PMB 76-10', value: 'As per customer needs' },
+      { label: 'PMB 82-10', value: 'As per customer needs' },
+      { label: 'PMB 76-22', value: 'As per customer needs' },
+    ],
+    note: 'PMB / CRMB in association with DRG Bitumen.',
+    image: '/product/EE17E8CD-A7D5-4250-AD96-215CBB923A38.jpg',
+    alt: 'Polymer modified bitumen drum on a pallet at a plant',
+  },
+  {
+    slug: 'crumb-rubber-modified-bitumen',
+    code: 'Crumb Rubber Modified Bitumen',
+    name: 'CRMB 50 / 55 / 60',
+    category: 'Crumb Rubber Modified Bitumen · As per IRC & IS Standards',
+    tagline: 'Crumb rubber modified bitumen supplied as per customer needs, matching IRC and IS standards.',
+    overview:
+      'Roadtech supplies Crumb Rubber Modified Bitumen (CRMB) as per customer needs, matching IRC and IS standards. CRMB blends reclaimed rubber crumb into the binder to improve elasticity, durability and resistance to deformation, while putting recycled material to productive use.',
+    applications: [
+      'Durable, elastic wearing courses',
+      'High-stress and heavily loaded pavements',
+      'Sustainable surfacing using recycled rubber',
+    ],
+    // Grades table (adapted from the lab-spec table used by the emulsion pages).
+    specRef: 'Available Grades',
+    specs: [
+      { label: 'CRMB 50', value: 'As per customer needs' },
+      { label: 'CRMB 55', value: 'As per customer needs' },
+      { label: 'CRMB 60', value: 'As per customer needs' },
+    ],
+    note: 'PMB / CRMB in association with DRG Bitumen.',
+    image: '/product/59A612DB-A677-4813-A089-393FED30EF06.jpg',
+    alt: 'Crumb rubber modified bitumen being blended in a vessel',
   },
 ]
 

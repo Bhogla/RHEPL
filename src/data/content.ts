@@ -19,10 +19,13 @@ export const contact = {
   whatsappHref: '917017077202',
   emailGeneral: 'info@roadtech-asphalt.com',
   emailSales: 'sales@roadtech-asphalt.com',
-  workingHours: '9:30 AM – 6:00 PM',
+  workingHours: '9:30 AM – 6:30 PM',
   workingDays: 'Monday to Saturday',
   plantAddress: '114, 114-B, Delhi Rd, Jandhera, Pahansu, Uttar Pradesh 247451',
   registeredAddress:
+    'Roadtech Asphalt Technologies Pvt Ltd\nTower T1, Unit No. A-907, NX-One,\nGreater Noida West, U.P. 201009',
+  // Upcoming Noida branch — placeholder copy; replace with the real Noida address later.
+  registeredAddressNoida:
     'Shop No. 3, 1st Floor, Sophia Market, Near Hindi Medium Sophia School, Saharanpur',
   // Plant coordinates from the PDF (Jandhera, Pahansu, UP).
   mapLat: 29.8963,
@@ -84,13 +87,13 @@ export const home = {
     title: 'Manufacturing Units',
     hint: '3 locations',
     locations: [
-      { city: 'Haridwar', line: 'Uttarakhand · Bitumen emulsions & modified bitumen' },
+      { city: 'Hyderabad', line: 'Telangana · Bitumen emulsions & modified bitumen' },
       { city: 'Mathura', line: 'Uttar Pradesh · Cold-mix & emulsion production' },
       { city: 'Saharanpur', line: 'Uttar Pradesh · Primary plant & registered operations' },
     ],
   },
   stat: {
-    value: '1 Million+',
+    value: '3 Million+',
     unit: 'sq. metres',
     label: 'Microsurfacing applied',
     body: 'Roadtech microsurfacing provides a durable and cost-effective solution to maintain roads and pavements, ensuring a safe and comfortable transportation experience.',
@@ -151,16 +154,16 @@ export const home = {
       },
       {
         code: 'S-02',
-        title: 'Bitumen Design',
-        body: 'Customized cold-mix and binder solutions — aggregate, binder and additives produced and applied at ambient temperatures.',
+        title: 'Rut Filling',
+        body: 'Repairs wheel-track depressions and grooves in the pavement, restoring a level surface that channels water away and prevents further deformation.',
         image: '/images/svc-bitumen-design.jpg',
         alt: 'An asphalt paver and roller laying a new road surface.',
         to: '/consultancy',
       },
       {
         code: 'S-03',
-        title: 'Material Testing',
-        body: 'Ensuring quality and compliance with our in-house lab — critical for the safety, durability and sustainability of every road.',
+        title: 'Road Marking',
+        body: 'Applies durable lane lines, symbols and safety markings to road surfaces, guiding traffic clearly and improving visibility in all conditions.',
         image: '/images/svc-testing.jpg',
         alt: 'A site engineer in protective gear inspecting equipment on a worksite.',
         to: '/consultancy',
@@ -174,6 +177,7 @@ export const home = {
         to: '/consultancy',
       },
     ],
+    note: 'Every service is delivered by trained crews using calibrated equipment and quality-tested materials. Not sure which solution fits your site? Talk to our team for a tailored recommendation.',
   },
   industries: {
     figure: 'FIG. 04 :: INDUSTRIES SERVED',
@@ -294,6 +298,7 @@ export type Product = {
   name: string
   subtitle?: string
   description?: string // omit where the source site provides no real description
+  contactNote?: string // for "contact technical team" cards: replaces the generic spec-on-request text in the box
   image?: string // omit to render the datasheet placeholder
   alt?: string
   slug?: string // when set, the card links to the dedicated /products/[slug] page
@@ -389,16 +394,6 @@ export const productTabs: ProductTab[] = [
       'Ready-to-use, all-weather materials laid at ambient temperature — no hot-mix plant, no heating.',
     products: [
       {
-        code: 'Coldmix',
-        name: 'Ready-to-Use Cold Mix Asphalt',
-        subtitle: 'IRC:100 / 116-2014',
-        slug: 'coldmix',
-        description:
-          'All-weather, ready-to-lay asphalt that needs no heating — open the bag and go. Stockpile-ready with a long shelf life, ideal for rural roads, remote sites and maintenance crews.',
-        image: '/product/3211FD90-3C66-4164-9C86-A21562219CA7.jpg',
-        alt: 'Coldmix ready-to-use cold mix asphalt in a bag on a rural road',
-      },
-      {
         code: 'Patch Pro',
         name: 'Ready-Mix Pothole Repair',
         subtitle: 'IRC:116-2014',
@@ -417,16 +412,21 @@ export const productTabs: ProductTab[] = [
     products: [
       {
         code: 'PMB',
-        name: 'Polymer Modified Bitumen',
-        subtitle: 'High Temperature Grade',
-        // No further description on the source site — gap-handling rule applies.
+        name: 'Bitumen',
+        subtitle: 'VG-10 / VG-30 / VG-40',
+        description:
+          'Different viscosity grades of bitumen to match your terrain, temperature and traffic. Imported bitumen supplied to high quality standards on demand.',
+        slug: 'bitumen',
         image: '/product/CAD7F274-C99D-444D-B351-493C5AD69267.jpg',
         alt: 'PMB polymer modified bitumen pouring from a plant spout',
       },
       {
         code: 'PMB 70',
-        name: 'Polymer Modified Bitumen 70',
-        subtitle: 'Low Temperature Grade',
+        name: 'Polymer Modified Bitumen',
+        subtitle: 'As per IRC & IS standards',
+        description:
+          'Polymer modified bitumen in grades 64-10, 70-10, 76-10, 82-10 and 76-22, supplied as per customer needs and matching IRC & IS standards.',
+        slug: 'polymer-modified-bitumen',
         image: '/product/EE17E8CD-A7D5-4250-AD96-215CBB923A38.jpg',
         alt: 'PMB 70 polymer modified bitumen drum on a pallet at a plant',
       },
@@ -434,6 +434,9 @@ export const productTabs: ProductTab[] = [
         code: 'CRMB 50 / 55 / 60',
         name: 'Crumb Rubber Modified Bitumen',
         subtitle: 'As per customer needs — matching IRC & IS standards',
+        description:
+          'Crumb rubber modified bitumen (CRMB 50 / 55 / 60), supplied as per customer needs and matching IRC & IS standards.',
+        slug: 'crumb-rubber-modified-bitumen',
         image: '/product/59A612DB-A677-4813-A089-393FED30EF06.jpg',
         alt: 'CRMB crumb rubber modified bitumen being blended in a vessel',
       },
@@ -450,6 +453,50 @@ export const productTabs: ProductTab[] = [
         // Title only on the source site — gap-handling rule applies.
         image: '/product/023B8262-C8DF-43DE-AD97-9591F360E832.jpg',
         alt: 'RAP rejuvenator oil poured over recycled asphalt granules',
+      },
+      {
+        code: 'EMULSIFIER',
+        name: 'Emulsifiers – General Emulsions',
+        contactNote: 'Emulsifiers for general emulsions like RS-1, CSS-1 and tailor-made emulsion.',
+        // Placeholder image — swap for a real one later.
+        image: '/product/pme.jpg',
+        alt: 'Emulsifier for general bitumen emulsions',
+      },
+      {
+        code: 'EMULSIFIER',
+        name: 'Emulsifiers – Tailor Made Emulsion',
+        contactNote:
+          'High workability when mixed with aggregate — for cold mix, microsurfacing and slurry seal emulsion.',
+        // Placeholder image — swap for a real one later.
+        image: '/product/cme.jpg',
+        alt: 'Tailor-made emulsifier for cold mix and microsurfacing emulsions',
+      },
+      {
+        code: 'SBR LATEX',
+        name: 'SBR Latex',
+        contactNote:
+          'For manufacturing microsurfacing emulsion; adds strength and extends the life of the microsurfacing layer.',
+        // Placeholder image — swap for a real one later.
+        image: '/product/5830D47A-EEF8-43D2-9EE8-37E88C3E2742.jpg',
+        alt: 'SBR latex additive for microsurfacing emulsion',
+      },
+      {
+        code: 'ANTI-STRIP',
+        name: 'Anti-Stripping Agents',
+        contactNote:
+          'All grades — nano-technology based and fatty-amine based — to enhance coating of the bituminous layer over stripping-prone aggregate.',
+        // Placeholder image — swap for a real one later.
+        image: '/product/CAD7F274-C99D-444D-B351-493C5AD69267.jpg',
+        alt: 'Anti-stripping agent improving bitumen coating over aggregate',
+      },
+      {
+        code: 'ADDITIVE 441',
+        name: 'Warm Mix Additive (Additive 441 Gold)',
+        contactNote:
+          'Energy saving up to 30%, lower production/laying/compaction temperature, in-built anti-stripping, longer haul distance, extended working window.',
+        // Placeholder image — swap for a real one later.
+        image: '/product/EE17E8CD-A7D5-4250-AD96-215CBB923A38.jpg',
+        alt: 'Warm mix additive (Additive 441 Gold) for lower-temperature asphalt',
       },
     ],
   },
