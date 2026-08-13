@@ -443,17 +443,10 @@ export const productTabs: ProductTab[] = [
     ],
   },
   {
-    id: 'additives',
-    label: 'Emulsifiers & Additives',
-    intro: 'Additives that extend material life and support sustainable reuse.',
+    id: 'emulsifiers',
+    label: 'Emulsifiers',
+    intro: 'Emulsifiers and latex for producing and tailoring bitumen emulsions.',
     products: [
-      {
-        code: 'RAP',
-        name: 'Recycled Asphalt Pavement (RAP) Rejuvenator',
-        // Title only on the source site — gap-handling rule applies.
-        image: '/product/023B8262-C8DF-43DE-AD97-9591F360E832.jpg',
-        alt: 'RAP rejuvenator oil poured over recycled asphalt granules',
-      },
       {
         code: 'EMULSIFIER',
         name: 'Emulsifiers – General Emulsions',
@@ -480,6 +473,13 @@ export const productTabs: ProductTab[] = [
         image: '/product/5830D47A-EEF8-43D2-9EE8-37E88C3E2742.jpg',
         alt: 'SBR latex additive for microsurfacing emulsion',
       },
+    ],
+  },
+  {
+    id: 'additives',
+    label: 'Additives & Specialty',
+    intro: 'Performance additives and specialty products for mixing, recycling and waterproofing.',
+    products: [
       {
         code: 'ANTI-STRIP',
         name: 'Anti-Stripping Agents',
@@ -497,6 +497,29 @@ export const productTabs: ProductTab[] = [
         // Placeholder image — swap for a real one later.
         image: '/product/EE17E8CD-A7D5-4250-AD96-215CBB923A38.jpg',
         alt: 'Warm mix additive (Additive 441 Gold) for lower-temperature asphalt',
+      },
+      {
+        code: 'LDO',
+        name: 'Low Density Oil',
+        contactNote: 'Used in hot mix plants.',
+        // Placeholder image — swap for a real one later.
+        image: '/product/pme.jpg',
+        alt: 'Low density oil for use in hot mix plants',
+      },
+      {
+        code: 'RAP',
+        name: 'Recycled Asphalt Pavement (RAP) Rejuvenator',
+        contactNote: 'Used to maximize the use of RAP material.',
+        image: '/product/023B8262-C8DF-43DE-AD97-9591F360E832.jpg',
+        alt: 'RAP rejuvenator oil poured over recycled asphalt granules',
+      },
+      {
+        code: 'MEMBRANE',
+        name: 'Water Proofing Membranes',
+        contactNote: 'Used in buildings, bridge decks etc. as per the required standards.',
+        // Placeholder image — swap for a real one later.
+        image: '/product/515C8431-CDA9-4597-AB05-F2F89734A9A9.jpg',
+        alt: 'Waterproofing membrane for buildings and bridge decks',
       },
     ],
   },
@@ -522,7 +545,7 @@ export const consultancy = {
         'Our highly trained team can support customers in the production of any grade of emulsion, modified bitumen and more, at the customer’s premises or plant.',
       ],
       points: [
-        { code: 'C-01', title: 'New Construction', body: 'Cold mix and hot mix application support for new road builds.' },
+        { code: 'C-01', title: 'Tailored Emulsion', body: 'Custom emulsion formulations engineered and produced to your specification, grade and application.' },
         { code: 'C-02', title: 'Maintenance Technology', body: 'Microsurfacing and seal technologies to extend pavement life.' },
         { code: 'C-03', title: 'On-Site Production', body: 'Production of emulsions and modified bitumen at your premises or plant.' },
         { code: 'C-04', title: 'Grade Customisation', body: 'Any grade of emulsion or modified bitumen, matched to your specification.' },
@@ -581,11 +604,26 @@ export const join = {
       empty: 'No current openings posted.',
       note: 'New roles are listed here as they open. Check back soon.',
     },
-    {
-      code: 'TND',
-      title: 'Tenders',
-      empty: 'No open tenders at this time.',
-      note: 'Active tender notices and documents will be published here.',
-    },
   ],
+  // Right-hand panel: B2B collaboration + track record. Rows are easy to edit.
+  b2b: {
+    code: 'B2B',
+    title: 'B2B Collaboration',
+    intro:
+      'Partner with Roadtech on bituminous products and road solutions. Work with us as a contractor, distributor or applicator — tell us your requirement and our team will take it forward.',
+    highlight: 'Successful application of approx. 22,00,000 sq.mt with the following clients',
+    clients: [
+      { sno: 1, name: 'HPPWD', state: 'Himachal Pradesh', qty: '3,50,000 sq.mt' },
+      { sno: 2, name: 'DBL', state: 'Haryana', qty: '75,000 sq.mt' },
+      { sno: 3, name: 'Hindustan Colas', state: 'Maharashtra', qty: '1,75,000 sq.mt' },
+      { sno: 4, name: 'Interise', state: 'Maharashtra', qty: '3,50,000 sq.mt' },
+      { sno: 5, name: 'GCC', state: 'Haryana', qty: '2,21,000 sq.mt' },
+      { sno: 6, name: 'Kaluwala Cons.', state: 'Haryana', qty: '2,21,000 sq.mt' },
+      { sno: 7, name: 'GCC', state: 'Haryana', qty: '50,085 sq.mt' },
+      { sno: 8, name: 'Hindustan Colas', state: 'Rajasthan', qty: '3,50,000 sq.mt' },
+      { sno: 9, name: 'RR Builders', state: 'Punjab', qty: '40,000 sq.mt' },
+      { sno: 10, name: 'Interise', state: 'Maharashtra', qty: '1,30,000 sq.mt' },
+      { sno: 11, name: 'Interise', state: 'Maharashtra', qty: '3,00,000 sq.mt' },
+    ],
+  },
 }

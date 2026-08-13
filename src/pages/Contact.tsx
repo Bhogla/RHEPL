@@ -96,7 +96,7 @@ export function Contact() {
         <div className="shell grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           {/* form */}
           <Reveal>
-            <div className="border border-warm-line bg-white p-6 sm:p-8">
+            <div className="flex h-full flex-col border border-warm-line bg-white p-6 sm:p-8">
               <span className="font-mono text-xs uppercase tracking-label text-asphalt">
                 [ ENQUIRY FORM ]
               </span>
@@ -211,14 +211,30 @@ export function Contact() {
                   </button>
                 </form>
               )}
+
+              {/* Pinned to the bottom so the form and details cards align in height */}
+              <div className="mt-auto">
+                <DashRule className="mb-5 mt-8 opacity-60" />
+                <p className="text-sm leading-relaxed text-warm-mute">
+                  Prefer to talk it through? Call{' '}
+                  <a
+                    href={`tel:${contact.phoneHref}`}
+                    className="text-ink underline decoration-asphalt underline-offset-2 hover:text-asphalt"
+                  >
+                    {contact.phoneDisplay}
+                  </a>{' '}
+                  or message us on WhatsApp — we'll route your enquiry to the right technical
+                  contact.
+                </p>
+              </div>
             </div>
           </Reveal>
 
           {/* details */}
           <Reveal delay={120}>
-            <div className="flex flex-col gap-2 bg-ink p-6 sm:p-8">
+            <div className="flex h-full flex-col gap-2 bg-ink p-6 sm:p-8">
               <span className="font-mono text-xs uppercase tracking-label text-asphalt">
-                [ REGISTERED OFFICE ]
+                [ CONTACT DETAILS ]
               </span>
               <h2 className="mt-2 font-display text-3xl font-semibold uppercase text-warm">
                 Reach us directly
@@ -240,8 +256,11 @@ export function Contact() {
                 <Detail icon={MapPin} label="Plant Address">
                   {contact.plantAddress}
                 </Detail>
-                <Detail icon={MapPin} label="Registered Address">
-                  {contact.registeredAddress}
+                <Detail icon={MapPin} label="Corporate Office">
+                  <span className="whitespace-pre-line">{contact.registeredAddress}</span>
+                </Detail>
+                <Detail icon={MapPin} label="Registered Office">
+                  {contact.registeredAddressNoida}
                 </Detail>
                 <Detail icon={Clock} label="Working Hours">
                   {contact.workingHours} · {contact.workingDays}
@@ -286,7 +305,7 @@ export function Contact() {
       {/* map */}
       <section className="bg-ink pb-16">
         <div className="shell">
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
             <Chip kind="accent" className="text-warm/90">
               MAP :: PLANT · JANDHERA, PAHANSU, UP
             </Chip>
