@@ -10,12 +10,18 @@ import { useEffect, useRef, useState } from 'react'
  * restart under a short dissolve. A requestAnimationFrame loop watches
  * currentTime against duration and drives the opacities.
  *
- * prefers-reduced-motion: reduce → fall back to a single natively-looping video
- * (no crossfade, no rAF). A first-frame still sits behind everything so there is
- * no black flash before playback, and play() rejections are swallowed so a
- * blocked autoplay never throws.
+ * Load-in: there is NO poster photo (a mismatched still would "pop" and get
+ * replaced when the video starts). Instead a solid dark base — the same colour
+ * as the hero itself (bg-ink, under the hero veils) — sits behind everything and
+ * the video layer fades in only once its first frame is actually decodable
+ * (loadeddata / canplay / playing). So the load reads as a gentle fade from the
+ * hero's own dark ground straight into the moving clip, with no image-to-video
+ * swap. play() rejections are swallowed so a blocked autoplay never throws.
  *
- * Purely decorative: object-cover, behind the hero text and the existing veils.
+ * prefers-reduced-motion: reduce → show a single, non-playing video parked on
+ * its first frame (a static image, no crossfade, no fade, no rAF).
+ *
+ * Purely decorative (aria-hidden): object-cover, behind the hero text and veils.
  */
 const CROSSFADE = 0.5 // seconds of dissolve at the loop seam
 
@@ -25,7 +31,7 @@ function safePlay(v: HTMLVideoElement | null) {
   if (p && typeof p.then === 'function') p.catch(() => {})
 }
 
-export function HeroVideo({ src, poster, alt }: { src: string; poster: string; alt: string }) {
+export function HeroVideo({ src }: { src: string }) {
   const [reduced] = useState(
     () =>
       typeof window !== 'undefined' &&
@@ -36,12 +42,25 @@ export function HeroVideo({ src, poster, alt }: { src: string; poster: string; a
   const bRef = useRef<HTMLVideoElement>(null)
   const singleRef = useRef<HTMLVideoElement>(null)
 
-  const onFirstPlay = () => setReady(true)
+  const onReady = () => setReady(true)
 
-  // Reduced motion: just autoplay the single looping video (handle rejection).
+  // Reduced motion: park the single video on its first frame (static, no fade).
   useEffect(() => {
     if (!reduced) return
-    safePlay(singleRef.current)
+    const v = singleRef.current
+    if (!v) return
+    const paint = () => {
+      // Nudge to the first frame so a paused <video> reliably paints it.
+      try {
+        v.currentTime = 0
+      } catch {
+        /* not seekable yet — harmless */
+      }
+      setReady(true)
+    }
+    if (v.readyState >= 2) paint()
+    else v.addEventListener('loadeddata', paint, { once: true })
+    return () => v.removeEventListener('loadeddata', paint)
   }, [reduced])
 
   // Dual-video crossfade loop.
@@ -106,26 +125,20 @@ export function HeroVideo({ src, poster, alt }: { src: string; poster: string; a
   }, [reduced])
 
   return (
-    <>
-      {/* First-frame still — prevents any black flash before playback. */}
-      <img
-        src={poster}
-        alt={alt}
-        className={`absolute inset-0 -z-20 h-full w-full object-cover object-center transition-opacity duration-1000 ${
-          ready ? 'opacity-0' : 'opacity-100'
-        }`}
-      />
+    <div aria-hidden>
+      {/* Solid dark base matching the hero — shown until the video's first frame
+          paints, so nothing visibly "pops" when playback begins. */}
+      <div className="absolute inset-0 -z-20 bg-ink" />
 
       {reduced ? (
         <video
           ref={singleRef}
-          loop
           muted
           playsInline
           preload="auto"
-          poster={poster}
-          onPlaying={onFirstPlay}
-          className={`absolute inset-0 -z-10 h-full w-full object-cover object-center transition-opacity duration-1000 ${
+          onLoadedData={onReady}
+          onCanPlay={onReady}
+          className={`absolute inset-0 -z-10 h-full w-full object-cover object-center ${
             ready ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -133,7 +146,7 @@ export function HeroVideo({ src, poster, alt }: { src: string; poster: string; a
         </video>
       ) : (
         <div
-          className={`absolute inset-0 -z-10 transition-opacity duration-1000 ${
+          className={`absolute inset-0 -z-10 transition-opacity duration-700 ease-out ${
             ready ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -142,8 +155,9 @@ export function HeroVideo({ src, poster, alt }: { src: string; poster: string; a
             muted
             playsInline
             preload="auto"
-            poster={poster}
-            onPlaying={onFirstPlay}
+            onLoadedData={onReady}
+            onCanPlay={onReady}
+            onPlaying={onReady}
             style={{ opacity: 1 }}
             className="absolute inset-0 h-full w-full object-cover object-center"
           >
@@ -161,6 +175,6 @@ export function HeroVideo({ src, poster, alt }: { src: string; poster: string; a
           </video>
         </div>
       )}
-    </>
+    </div>
   )
 }

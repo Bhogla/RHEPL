@@ -19,11 +19,7 @@ export function Home() {
     <>
       {/* ---------------- HERO ---------------- */}
       <section className="relative isolate flex min-h-[clamp(34rem,82vh,46rem)] items-center overflow-hidden bg-ink">
-        <HeroVideo
-          src="/hero.mp4"
-          poster="/images/hero-highway.jpg"
-          alt="National Highway 11 in Rajasthan, India, with an overhead green direction sign to Dausa, Agra and Ajmer."
-        />
+        <HeroVideo src="/hero.mp4" />
 
         <div className="absolute inset-0 -z-10 bg-hero-veil" />
         <div className="absolute inset-0 -z-10 bg-hero-veil-b sm:hidden" />

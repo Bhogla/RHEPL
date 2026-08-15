@@ -78,16 +78,16 @@ export function Header() {
     <>
       {/* Constant-height spacer keeps page content from shifting when the fixed
           header shrinks on scroll (matches the header's tall/default height). */}
-      <div className="h-[4.5rem] lg:h-28" aria-hidden />
+      <div className="h-20 lg:h-28" aria-hidden />
 
       <header
         className={`fixed inset-x-0 top-0 z-header border-b transition-[background-color,border-color,height] duration-300 ease-out motion-reduce:transition-none ${
           scrolled
             ? 'border-ink-line bg-ink/90 backdrop-blur-md'
             : 'border-transparent bg-ink'
-        } h-[4.5rem] ${scrolled ? 'lg:h-[4.5rem]' : 'lg:h-28'}`}
+        } h-20 ${scrolled ? 'lg:h-[4.5rem]' : 'lg:h-28'}`}
       >
-        <div className="shell flex h-full items-center justify-between gap-4 lg:grid lg:grid-cols-[auto_1fr_auto] lg:gap-6">
+        <div className="shell flex h-full items-center justify-between gap-4 lg:grid lg:max-w-[1360px] lg:grid-cols-[auto_1fr_auto] lg:gap-4">
           {/* LEFT: primary nav (desktop) */}
           <nav
             aria-label="Primary"
@@ -148,7 +148,7 @@ export function Header() {
       {/* mobile drawer */}
       <div
         id="mobile-menu"
-        className={`fixed inset-0 top-[4.5rem] z-sticky lg:hidden ${open ? '' : 'pointer-events-none'}`}
+        className={`fixed inset-0 top-20 z-sticky lg:hidden ${open ? '' : 'pointer-events-none'}`}
         aria-hidden={!open}
       >
         <div

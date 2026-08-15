@@ -15,15 +15,15 @@ import logoMark from '../assets/logo-mark.png'
 type LogoSize = 'lg' | 'md' | 'sm'
 
 const MARK: Record<LogoSize, string> = {
-  lg: 'h-10 w-10 xl:h-14 xl:w-14',
-  md: 'h-9 w-9',
-  sm: 'h-9 w-9',
+  lg: 'h-16 w-16 xl:h-[4.25rem] xl:w-[4.25rem]', // top state: 64 → 68px
+  md: 'h-[3.25rem] w-[3.25rem]', // scrolled state: 52px
+  sm: 'h-16 w-16', // mobile: 64px (was 40 — +60%)
 }
 
 const NAME: Record<LogoSize, string> = {
-  lg: 'whitespace-nowrap text-[1.3rem] leading-[0.95] xl:text-[1.85rem]',
-  md: 'whitespace-nowrap text-[1.15rem] leading-none',
-  sm: 'text-base leading-tight',
+  lg: 'whitespace-nowrap text-[1.7rem] leading-[0.95] xl:text-[clamp(1.95rem,calc(6.9vw-3.59rem),2.65rem)]', // 31px → fluid up to ~42px, fills the wider header
+  md: 'whitespace-nowrap text-[1.35rem] leading-none', // ~22px
+  sm: 'text-[1.4rem] leading-tight', // ~22px (was 18 — fills toward the menu button)
 }
 
 export function Logo({
@@ -44,7 +44,7 @@ export function Logo({
       to="/"
       onClick={onClick}
       aria-label="Roadtech Asphalt Technologies — home"
-      className={`group flex items-center gap-3 ${className}`}
+      className={`group flex items-center gap-2.5 ${className}`}
     >
       <img
         src={logoMark}
@@ -60,7 +60,7 @@ export function Logo({
           Roadtech Asphalt Technologies Pvt Ltd
         </span>
         {showTagline && (
-          <span className="mt-1 font-display text-xs font-medium uppercase tracking-[0.18em] text-aggregate">
+          <span className="mt-1 block text-right font-display text-xs font-medium uppercase tracking-[0.18em] text-aggregate">
             We Make The Way
           </span>
         )}

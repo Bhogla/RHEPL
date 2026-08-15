@@ -53,6 +53,7 @@ export function AssociateBrands() {
             <span className="font-display text-sm font-semibold uppercase tracking-label text-asphalt">
               Trusted Partners
             </span>
+            <span aria-hidden className="h-px w-8 bg-asphalt" />
           </div>
 
           {/* Heading */}
