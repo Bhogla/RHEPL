@@ -15,9 +15,9 @@ import logoMark from '../assets/logo-mark.png'
 type LogoSize = 'lg' | 'md' | 'sm'
 
 const MARK: Record<LogoSize, string> = {
-  lg: 'h-16 w-16 xl:h-[4.25rem] xl:w-[4.25rem]', // top state: 64 → 68px
-  md: 'h-[3.25rem] w-[3.25rem]', // scrolled state: 52px
-  sm: 'h-16 w-16', // mobile: 64px (was 40 — +60%)
+  lg: 'h-[5.8rem] w-[5.8rem] xl:h-[6.16rem] xl:w-[6.16rem]', // top state: 93 → 98.6px (+45%)
+  md: 'h-[4.71rem] w-[4.71rem]', // scrolled state: 75.4px (+45%)
+  sm: 'h-[5.8rem] w-[5.8rem]', // mobile: 92.8px (+45%)
 }
 
 const NAME: Record<LogoSize, string> = {
