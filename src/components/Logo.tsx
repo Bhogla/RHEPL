@@ -21,7 +21,11 @@ const MARK: Record<LogoSize, string> = {
 }
 
 const NAME: Record<LogoSize, string> = {
-  lg: 'whitespace-nowrap text-[1.7rem] leading-[0.95] xl:text-[clamp(1.95rem,calc(6.9vw-3.59rem),2.65rem)]', // 31px → fluid up to ~42px, fills the wider header
+  // Single continuous fluid clamp from the lg breakpoint up (no xl step) — 22px at
+  // 1024px viewport → ~42px by ~1450px, then holds. Avoids the old two-stage
+  // fixed→clamp jump at the xl breakpoint, which (combined with the larger mark)
+  // was overflowing the header just past 1280px.
+  lg: 'whitespace-nowrap text-[clamp(1.35rem,calc(4.91vw-1.79rem),2.65rem)] leading-[0.95]',
   md: 'whitespace-nowrap text-[1.35rem] leading-none', // ~22px
   sm: 'text-[1.4rem] leading-tight', // ~22px (was 18 — fills toward the menu button)
 }

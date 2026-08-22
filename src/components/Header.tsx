@@ -68,7 +68,7 @@ export function Header() {
   const topNavLabels: Record<string, string> = { '/about': 'About', '/join': 'Join' }
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `relative whitespace-nowrap py-1 font-display text-base font-semibold uppercase tracking-wide transition-colors duration-200 ease-out after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:bg-asphalt after:transition-all after:duration-300 after:ease-out ${
+    `relative whitespace-nowrap py-1 font-display text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ease-out after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:bg-asphalt after:transition-all after:duration-300 after:ease-out ${
       isActive
         ? 'text-warm after:w-full'
         : 'text-aggregate hover:text-warm after:w-0 hover:after:w-full'
@@ -87,11 +87,11 @@ export function Header() {
             : 'border-transparent bg-ink'
         } h-20 ${scrolled ? 'lg:h-[4.5rem]' : 'lg:h-28'}`}
       >
-        <div className="shell flex h-full items-center justify-between gap-4 lg:grid lg:max-w-[1360px] lg:grid-cols-[auto_1fr_auto] lg:gap-4">
+        <div className="shell flex h-full items-center justify-between gap-4 lg:grid lg:max-w-[1360px] lg:grid-cols-[auto_1fr_auto] lg:gap-2">
           {/* LEFT: primary nav (desktop) */}
           <nav
             aria-label="Primary"
-            className="hidden items-center gap-4 justify-self-start lg:flex xl:gap-6"
+            className="hidden items-center gap-2 justify-self-start lg:flex"
           >
             {nav.map((item) => (
               <NavLink key={item.to} to={item.to} className={linkClass} end={item.to === '/'}>
@@ -111,7 +111,7 @@ export function Header() {
           </div>
 
           {/* RIGHT: WhatsApp + call (desktop) and mobile menu toggle */}
-          <div className="flex items-center gap-2 justify-self-end">
+          <div className="flex items-center gap-1.5 justify-self-end">
             <a
               href={`https://wa.me/${contact.whatsappHref}`}
               target="_blank"
@@ -123,7 +123,7 @@ export function Header() {
             </a>
             <a
               href={`tel:${contact.phoneHref}`}
-              className="hidden shrink-0 items-center gap-2 whitespace-nowrap bg-asphalt px-4 py-2.5 font-display text-base font-semibold uppercase tracking-wide text-white transition-colors duration-200 ease-out hover:bg-asphalt-deep lg:inline-flex"
+              className="hidden shrink-0 items-center gap-2 whitespace-nowrap bg-asphalt px-3 py-2 font-display text-sm font-semibold uppercase tracking-wide text-white transition-colors duration-200 ease-out hover:bg-asphalt-deep lg:inline-flex"
             >
               <Phone className="h-4 w-4 shrink-0" />
               <span className="whitespace-nowrap">{contact.phoneDisplay}</span>
