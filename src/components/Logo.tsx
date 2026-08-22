@@ -21,11 +21,11 @@ const MARK: Record<LogoSize, string> = {
 }
 
 const NAME: Record<LogoSize, string> = {
-  // Single continuous fluid clamp from the lg breakpoint up (no xl step) — 22px at
+  // Single continuous fluid clamp from the lg breakpoint up (no xl step) — ~18px at
   // 1024px viewport → ~42px by ~1450px, then holds. Avoids the old two-stage
-  // fixed→clamp jump at the xl breakpoint, which (combined with the larger mark)
-  // was overflowing the header just past 1280px.
-  lg: 'whitespace-nowrap text-[clamp(1.35rem,calc(4.91vw-1.79rem),2.65rem)] leading-[0.95]',
+  // fixed→clamp jump at the xl breakpoint. Min trimmed further to free up room for
+  // the wider (1.75rem) nav-link gap without the phone CTA overflowing at 1024px.
+  lg: 'whitespace-nowrap text-[clamp(1.1rem,calc(5.85vw-2.64rem),2.65rem)] leading-[0.95]',
   md: 'whitespace-nowrap text-[1.35rem] leading-none', // ~22px
   sm: 'text-[1.4rem] leading-tight', // ~22px (was 18 — fills toward the menu button)
 }

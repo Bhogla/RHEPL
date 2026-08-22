@@ -91,7 +91,7 @@ export function Header() {
           {/* LEFT: primary nav (desktop) */}
           <nav
             aria-label="Primary"
-            className="hidden items-center gap-2 justify-self-start lg:flex"
+            className="hidden items-center gap-[1.75rem] justify-self-start lg:flex"
           >
             {nav.map((item) => (
               <NavLink key={item.to} to={item.to} className={linkClass} end={item.to === '/'}>
