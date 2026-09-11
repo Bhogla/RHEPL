@@ -48,7 +48,7 @@ export function Logo({
       to="/"
       onClick={onClick}
       aria-label="Roadtech Asphalt Technologies — home"
-      className={`group flex items-center gap-2.5 ${className}`}
+      className={`group flex items-center gap-0 ${className}`}
     >
       <img
         src={logoMark}

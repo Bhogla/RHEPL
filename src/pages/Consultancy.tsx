@@ -135,7 +135,7 @@ function GalleryTab() {
                 src={img.src}
                 alt={img.alt}
                 loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-[700ms] ease-out group-hover:scale-105"
+                className={`h-full w-full object-cover transition-transform duration-[700ms] ease-out group-hover:scale-105 ${img.imageClassName ?? ''}`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
               <figcaption className="absolute inset-x-0 bottom-0 p-4">

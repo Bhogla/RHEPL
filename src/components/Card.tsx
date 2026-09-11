@@ -8,6 +8,8 @@ export type CardProps = {
   title: string
   body?: ReactNode
   image?: string
+  /** Extra object-position utility, e.g. 'object-bottom' to crop out a top watermark/logo */
+  imageClassName?: string
   alt?: string
   to?: string
   /** Footnote shown when there's no real spec (gap handling) */
@@ -24,6 +26,7 @@ export function Card({
   title,
   body,
   image,
+  imageClassName = '',
   alt,
   to,
   note,
@@ -53,7 +56,7 @@ export function Card({
             src={image}
             alt={alt ?? ''}
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover/card:scale-[1.04]"
+            className={`h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover/card:scale-[1.04] ${imageClassName}`}
           />
         ) : (
           <ImagePlaceholder

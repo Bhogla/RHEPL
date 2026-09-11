@@ -22,6 +22,10 @@ const brands: Brand[] = [
   { src: '/Logos/3.PNG', alt: 'KC' },
   { src: '/Logos/2.PNG', alt: 'RR Builders' },
   { src: '/Logos/14.PNG', alt: 'RCC Developers Limited' },
+  { src: '/Logos/15.PNG', alt: 'Afcons Infrastructure' },
+  { src: '/Logos/16.PNG', alt: 'Celgall' },
+  { src: '/Logos/17.PNG', alt: 'PWD Haryana — Buildings & Roads' },
+  { src: '/Logos/18.PNG', alt: 'APCO Infratech' },
 ]
 
 function BrandChip({ brand }: { brand: Brand }) {

@@ -16,7 +16,8 @@ function CardInner({ product }: { product: Product }) {
             src={product.image}
             alt={product.alt ?? ''}
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]"
+            decoding="async"
+            className={`h-full w-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04] ${product.imageClassName ?? ''}`}
           />
         ) : (
           <ImagePlaceholder tone="warm" className="h-full w-full" />

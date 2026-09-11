@@ -7,11 +7,47 @@ import { Chip, DashRule, FigureLabel, SectionHeading } from '../components/ui'
 import { ArrowRight, Handshake, ShieldCheck, Users } from '../components/icons'
 import guptaPhoto from '../assets/directors/gupta.png'
 import sharawatPhoto from '../assets/directors/sharawat.png'
+import legacy1 from '../assets/legacy/legacy-1.png'
+import legacy2 from '../assets/legacy/legacy-2.png'
+import legacy3 from '../assets/legacy/legacy-3.png'
+import legacy4 from '../assets/legacy/legacy-4.png'
 
 const pillars = [
   { icon: ShieldCheck, title: 'Integrity & Safety', body: 'Strict protocols and stringent quality control at every stage.' },
   { icon: Handshake, title: 'Collaboration', body: 'Working closely with promoters, customers and stakeholders.' },
   { icon: Users, title: 'Customer-Centricity', body: 'Technical services that maximise the life of every laid metre.' },
+]
+
+const legacyCaption = 'FIELD :: ACTIVE PROJECT DOCUMENTATION'
+
+// Real project-site photos, all 1536x1024 (3:2) — shown as a precise 3:2 grid.
+// `order` carries the mobile stack order (most impactful wide shot first) and
+// resets to natural reading order (1-2-3-4, left-to-right top-to-bottom) at lg.
+const legacyPhotos = [
+  {
+    src: legacy1,
+    alt: 'Overhead view of an asphalt paver screed laying fresh mix, with a worker in an orange vest alongside.',
+    objectPosition: 'object-center', // worker and screed centred, nothing important near the edges
+    order: 'order-4 lg:order-1',
+  },
+  {
+    src: legacy2,
+    alt: 'Aerial view of a highway paving crew — paver truck, four workers and traffic cones beside a green median.',
+    objectPosition: 'object-[center_40%]', // pulls the workers and truck into frame, keeps the median strip out
+    order: 'order-2 lg:order-2',
+  },
+  {
+    src: legacy3,
+    alt: 'Ground-level view of a paver and workers sweeping fresh aggregate into place.',
+    objectPosition: 'object-top', // keeps the paver and crew in frame, aggregate fills the lower half naturally
+    order: 'order-3 lg:order-3',
+  },
+  {
+    src: legacy4,
+    alt: 'Aerial view of an ALLTECH emulsion truck and a seven-person crew spreading red emulsion on a highway.',
+    objectPosition: 'object-center', // truck left, crew spread across centre, all content fits within the 3:2 crop
+    order: 'order-1 lg:order-4',
+  },
 ]
 
 const directors = [
@@ -94,6 +130,31 @@ export function About() {
                 </p>
               ))}
             </div>
+
+            {/* Real project-site photos — single column on mobile (reordered so the
+                widest, most impactful shot leads), 2x2 grid from lg up. All four source
+                photos are 1536x1024 (3:2), so each cell enforces that ratio exactly via
+                aspect-[3/2] + object-cover — no distortion, no letterboxing. */}
+            <div className="mt-10 grid max-w-prose grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-3">
+              {legacyPhotos.map((photo) => (
+                <div
+                  key={photo.src}
+                  className={`aspect-[3/2] w-full overflow-hidden rounded-lg border border-warm-line bg-ink ${photo.order}`}
+                >
+                  {/* TODO: compress to WebP before production deploy — source PNGs are 3-4.5MB each */}
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className={`h-full w-full object-cover ${photo.objectPosition}`}
+                  />
+                </div>
+              ))}
+            </div>
+            <p className="mt-3 max-w-prose font-mono text-[0.7rem] uppercase tracking-chip text-aggregate">
+              {legacyCaption}
+            </p>
           </Reveal>
         </div>
       </section>

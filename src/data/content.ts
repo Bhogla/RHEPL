@@ -108,32 +108,35 @@ export const home = {
         code: 'P-01',
         title: 'Bitumen Emulsion',
         body: 'Superior performance and sustainability for roads and pavements — high-quality emulsions for tack, prime and surface-maintenance coats.',
-        image: '/images/prod-emulsion.jpg',
-        alt: 'Close detail of a bitumen-sealed road surface around a cast manhole cover.',
+        image: '/images/prod-rs1-tack-coat.png',
+        alt: 'Tack coat spray application truck applying bitumen emulsion to a road.',
         to: '/products',
       },
       {
         code: 'P-02',
         title: 'Modified Bitumen',
         body: 'Enhanced performance and durability for highways, runways and expressways, engineered for high-load and high-temperature conditions.',
-        image: '/images/prod-modified.jpg',
-        alt: 'Top-down aerial of a multi-lane expressway bridge spanning water in India.',
+        image: '/images/prod-modified-bitumen.jpg',
+        imageClassName: 'object-[center_60%]',
+        alt: 'Road roller compacting fresh asphalt on a highway, with cars and bikes passing in the adjacent lane.',
         to: '/products',
       },
       {
         code: 'P-03',
         title: 'Coldmix Application',
         body: 'Roadtech Roadbond is a premix solution that provides a quick, durable and cost-effective answer for road maintenance, suitable for flexible and rigid pavements.',
-        image: '/images/prod-coldmix.jpg',
-        alt: 'Aerial view of a national highway running through Indian countryside.',
+        image: '/images/prod-coldmix-site.jpg',
+        imageClassName: 'object-[center_40%]',
+        alt: 'Two workers manually raking cold mix asphalt on a rural hill road, mountains in the background.',
         to: '/products',
       },
       {
         code: 'P-04',
         title: 'Special Products',
         body: 'Paving the way with specialized bituminous solutions for road surfaces, concrete protection and waterproofing.',
-        image: '/images/prod-special.jpg',
-        alt: 'Elevated expressway flyover curving through an Indian city.',
+        image: '/images/prod-special-products.jpg',
+        imageClassName: 'object-top',
+        alt: 'Microsurfacing truck applying emulsion on a curved urban road, with workers in orange vests and palm trees in the background.',
         to: '/products',
       },
     ],
@@ -148,8 +151,9 @@ export const home = {
         code: 'S-01',
         title: 'Microsurfacing',
         body: 'Restores the surface of existing roads by filling and sealing cracks, providing skid resistance and improving ride quality.',
-        image: '/images/svc-microsurfacing.jpg',
-        alt: 'An orange road roller compacting a freshly laid asphalt surface.',
+        image: '/images/svc-microsurfacing-site.jpg',
+        imageClassName: 'object-bottom', // crops out the GPS overlay + third-party logo along the top edge
+        alt: 'Microsurfacing machine and freshly treated road surface, Shamshabad, Hyderabad.',
         to: '/consultancy',
       },
       {
@@ -300,6 +304,7 @@ export type Product = {
   description?: string // omit where the source site provides no real description
   contactNote?: string // for "contact technical team" cards: replaces the generic spec-on-request text in the box
   image?: string // omit to render the datasheet placeholder
+  imageClassName?: string // extra object-position utility, e.g. 'object-top' to crop out a bottom watermark
   alt?: string
   slug?: string // when set, the card links to the dedicated /products/[slug] page
 }
@@ -325,8 +330,8 @@ export const productTabs: ProductTab[] = [
         slug: 'rs-1',
         description:
           "Rapid setting emulsion is a specialized bitumen emulsion designed for tack coat applications. Its quick-setting properties allow rapid bonding between layers of asphalt through a chemical reaction that occurs when the emulsion contacts the aggregate. Tack coat applications — ensuring adhesion between new and existing asphalt layers — require a product that sets quickly to minimize the risk of slippage or unevenness in the finished surface. The rapid setting emulsion's efficiency makes it a popular choice in road construction and maintenance projects.",
-        image: '/product/05522981-41DC-43BB-B510-5594E81FDD2B.jpg',
-        alt: 'RS-1 rapid setting cationic bitumen emulsion drum on a road',
+        image: '/images/prod-rs1-tack-coat.png',
+        alt: 'Tack coat spray application truck applying rapid setting bitumen emulsion to a road',
       },
       {
         code: 'CSS-1',
@@ -354,8 +359,15 @@ export const productTabs: ProductTab[] = [
         slug: 'ss-2',
         description:
           'A higher-viscosity slow-set cationic emulsion with more binder than SS-1, built for mixing with graded and fine aggregates — the choice for cold premix, MSS, SDBC and slurry seals.',
-        image: '/product/E0F03CFF-AF0D-441F-B643-2CF85402F510.jpg',
-        alt: 'SS-2 slow setting cationic bitumen emulsion drum on a road',
+        image: '/images/prod-ss2-site.jpg',
+        // Neither object-top nor object-bottom works here: at this card's 16:10
+        // crop, a plain "top" keeps the sky and crops the roller; a plain "bottom"
+        // would crop back into the GPS watermark band at the very bottom of the
+        // source photo. object-[50%_45%] threads both — starts just below the
+        // sky/horizon line so the roller and close road texture are prominent,
+        // and stays well clear of the watermark strip at the bottom edge.
+        imageClassName: 'object-[50%_45%]',
+        alt: 'SS-2 slow setting emulsion road construction in progress, Behat, Uttar Pradesh',
       },
       {
         code: 'CME',
@@ -363,8 +375,8 @@ export const productTabs: ProductTab[] = [
         subtitle: 'For Construction of Rural Roads',
         description:
           'A cold mix emulsion designed for the construction of rural roads. It offers several advantages over traditional hot mix asphalt, including lower energy consumption, reduced emissions, and easier handling. Cold mix emulsions can be mixed with aggregate at ambient temperatures, eliminating the need for costly heating equipment — particularly suitable for rural areas where infrastructure and resources may be limited, allowing faster construction times and reduced disruption to local communities.',
-        image: '/product/cme.jpg',
-        alt: 'CME cold mix bitumen emulsion drum on a road',
+        image: '/images/coldmix-tab-hero.jpg',
+        alt: 'Workers applying cold mix asphalt by hand on a hill road',
       },
       {
         code: 'CQS',
@@ -400,8 +412,8 @@ export const productTabs: ProductTab[] = [
         slug: 'patch-pro',
         description:
           'Permanent-feel pothole repair in minutes — pour, tamp, and open to traffic. Cold-applied and weather-independent for year-round patching.',
-        image: '/product/515C8431-CDA9-4597-AB05-F2F89734A9A9.jpg',
-        alt: 'Patch Pro cold-mix pothole repair being poured into a pothole',
+        image: '/images/prod-patch-pro.jpg',
+        alt: 'Roadtech Patch Pro 25kg ready-mix pothole repair bag',
       },
     ],
   },
@@ -417,8 +429,9 @@ export const productTabs: ProductTab[] = [
         description:
           'Different viscosity grades of bitumen to match your terrain, temperature and traffic. Imported bitumen supplied to high quality standards on demand.',
         slug: 'bitumen',
-        image: '/product/CAD7F274-C99D-444D-B351-493C5AD69267.jpg',
-        alt: 'PMB polymer modified bitumen pouring from a plant spout',
+        image: '/images/prod-ss2-site.jpg',
+        imageClassName: 'object-top', // source photo has a GPS watermark stamp along the bottom edge
+        alt: 'Road construction in progress, Behat, Uttar Pradesh',
       },
       {
         code: 'PMB 70',
@@ -445,33 +458,31 @@ export const productTabs: ProductTab[] = [
   {
     id: 'emulsifiers',
     label: 'Emulsifiers',
-    intro: 'Emulsifiers and latex for producing and tailoring bitumen emulsions.',
     products: [
       {
         code: 'EMULSIFIER',
         name: 'Emulsifiers – General Emulsions',
         contactNote: 'Emulsifiers for general emulsions like RS-1, CSS-1 and tailor-made emulsion.',
-        // Placeholder image — swap for a real one later.
-        image: '/product/pme.jpg',
-        alt: 'Emulsifier for general bitumen emulsions',
+        image: '/product/emulsifier-general.png',
+        alt: 'Black viscous bitumen poured from a stainless steel container into a glass beaker in a lab.',
       },
       {
         code: 'EMULSIFIER',
         name: 'Emulsifiers – Tailor Made Emulsion',
         contactNote:
           'High workability when mixed with aggregate — for cold mix, microsurfacing and slurry seal emulsion.',
-        // Placeholder image — swap for a real one later.
-        image: '/product/cme.jpg',
-        alt: 'Tailor-made emulsifier for cold mix and microsurfacing emulsions',
+        image: '/product/emulsifier-tailormade.png',
+        imageClassName: 'object-[center_40%]',
+        alt: 'Gloved hands stirring dark bitumen emulsion in a glass beaker with a glass rod.',
       },
       {
         code: 'SBR LATEX',
         name: 'SBR Latex',
         contactNote:
           'For manufacturing microsurfacing emulsion; adds strength and extends the life of the microsurfacing layer.',
-        // Placeholder image — swap for a real one later.
-        image: '/product/5830D47A-EEF8-43D2-9EE8-37E88C3E2742.jpg',
-        alt: 'SBR latex additive for microsurfacing emulsion',
+        image: '/product/emulsifier-sbr-latex.png',
+        imageClassName: 'object-[center_30%]',
+        alt: 'White milky SBR latex being poured from a glass bottle into a test tube.',
       },
     ],
   },
@@ -583,9 +594,9 @@ export const consultancy = {
         { src: '/images/about-construction.jpg', alt: 'A national highway under construction through hilly Indian terrain.', tag: 'HIGHWAY BUILD' },
         { src: '/images/svc-consultancy.jpg', alt: 'Aerial view of the Delhi–Gurgaon expressway corridor.', tag: 'EXPRESSWAY CORRIDOR' },
         { src: '/images/prod-special.jpg', alt: 'Elevated expressway flyover curving through an Indian city.', tag: 'URBAN FLYOVER' },
-        { src: '/images/svc-microsurfacing.jpg', alt: 'An orange road roller compacting a fresh asphalt surface.', tag: 'MICROSURFACING' },
+        { src: '/images/svc-microsurfacing-site.jpg', alt: 'Microsurfacing machine and freshly treated road surface, Shamshabad, Hyderabad.', tag: 'MICROSURFACING', imageClassName: 'object-bottom' },
         { src: '/images/svc-bitumen-design.jpg', alt: 'An asphalt paver and roller laying a new road surface.', tag: 'PAVING' },
-      ],
+      ] as { src: string; alt: string; tag: string; imageClassName?: string }[],
     },
   },
 }

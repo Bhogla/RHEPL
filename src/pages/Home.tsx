@@ -4,6 +4,7 @@ import { about, home } from '../data/content'
 import { Card } from '../components/Card'
 import { AssociateBrands } from '../components/AssociateBrands'
 import { HeroVideo } from '../components/HeroVideo'
+import { LegacyCarousel } from '../components/LegacyCarousel'
 import { Reveal } from '../components/Reveal'
 import { Modal } from '../components/Modal'
 import { Chip, DashRule, FigureLabel, SectionHeading } from '../components/ui'
@@ -94,20 +95,8 @@ export function Home() {
               </Link>
             </Reveal>
 
-            <Reveal delay={120} className="lg:pt-2">
-              <figure className="relative">
-                <div className="aspect-[4/5] overflow-hidden rounded-2xl border border-warm-line shadow-lift-warm sm:aspect-[4/3] lg:aspect-[4/5]">
-                  <img
-                    src="/images/legacy.png"
-                    alt="Aerial view of a national highway under construction through hilly terrain in India."
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <figcaption className="mt-3 font-mono text-[0.7rem] uppercase tracking-chip text-aggregate">
-                  FIG. 01.1 :: NATIONAL HIGHWAY BUILD, IN PROGRESS
-                </figcaption>
-              </figure>
+            <Reveal delay={120} className="lg:flex lg:flex-col lg:self-stretch lg:pt-16">
+              <LegacyCarousel />
             </Reveal>
           </div>
 
