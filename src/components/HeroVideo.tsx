@@ -138,7 +138,7 @@ export function HeroVideo({ src }: { src: string }) {
           preload="auto"
           onLoadedData={onReady}
           onCanPlay={onReady}
-          className={`absolute inset-0 -z-10 h-full w-full object-cover object-center ${
+          className={`absolute inset-0 -z-10 h-full w-full object-cover object-[70%_center] lg:object-center ${
             ready ? 'opacity-100' : 'opacity-0'
           }`}
         >
@@ -159,7 +159,7 @@ export function HeroVideo({ src }: { src: string }) {
             onCanPlay={onReady}
             onPlaying={onReady}
             style={{ opacity: 1 }}
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[70%_center] lg:object-center"
           >
             <source src={src} type="video/mp4" />
           </video>
@@ -169,7 +169,7 @@ export function HeroVideo({ src }: { src: string }) {
             playsInline
             preload="auto"
             style={{ opacity: 0 }}
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[70%_center] lg:object-center"
           >
             <source src={src} type="video/mp4" />
           </video>

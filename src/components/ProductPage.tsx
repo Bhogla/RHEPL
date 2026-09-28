@@ -108,9 +108,11 @@ function RelatedStrip({ current }: { current: ProductPageData }) {
                 to={`/products/${p.slug}`}
                 className="group flex h-full flex-col gap-2 border border-ink-line bg-charcoal p-6 transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-asphalt/50"
               >
-                <span className="font-mono text-xs uppercase tracking-chip text-asphalt">
-                  {p.code}
-                </span>
+                {p.code !== p.name && (
+                  <span className="font-mono text-xs uppercase tracking-chip text-asphalt">
+                    {p.code}
+                  </span>
+                )}
                 <span className="font-display text-xl font-semibold uppercase leading-tight text-warm">
                   {p.name}
                 </span>
@@ -131,15 +133,32 @@ export function ProductPage() {
   const { slug } = useParams()
   const product = getProduct(slug)
 
+  const titleName =
+    product && product.code !== product.name ? `${product.code} — ${product.name}` : product?.code
   usePageMeta(
-    product ? `${product.code} — ${product.name} | Roadtech Asphalt` : 'Product | Roadtech Asphalt',
+    product ? `${titleName} | Roadtech Asphalt` : 'Product | Roadtech Asphalt',
     product ? `${product.name}. ${product.tagline}` : '',
   )
 
   if (!product) return <NotFound />
 
-  const { code, name, category, tagline, overview, advantages, applications, specRef, specs, note, image, alt } =
-    product
+  const {
+    code,
+    name,
+    category,
+    tagline,
+    overview,
+    advantages,
+    applications,
+    specRef,
+    specs,
+    specColumns,
+    specLabelHeader,
+    extraSpecSections,
+    note,
+    image,
+    alt,
+  } = product
 
   return (
     <>
@@ -179,11 +198,13 @@ export function ProductPage() {
                   {code}
                 </h1>
               </Reveal>
-              <Reveal delay={130}>
-                <p className="mt-2 font-display text-2xl font-semibold uppercase leading-tight text-warm/80 sm:text-3xl">
-                  {name}
-                </p>
-              </Reveal>
+              {name !== code && (
+                <Reveal delay={130}>
+                  <p className="mt-2 font-display text-2xl font-semibold uppercase leading-tight text-warm/80 sm:text-3xl">
+                    {name}
+                  </p>
+                </Reveal>
+              )}
               <Reveal delay={190}>
                 <p className="mt-5 max-w-prose text-lg leading-relaxed text-aggregate sm:text-xl">
                   {tagline}
@@ -230,21 +251,145 @@ export function ProductPage() {
                     </h2>
                   </div>
                   <dl>
-                    {specs.map((spec, i) => (
+                    {specColumns && (
                       <div
-                        key={spec.label}
-                        className={`grid grid-cols-[1fr_auto] items-baseline gap-4 px-6 py-3.5 ${
-                          i > 0 ? 'border-t border-white/5' : ''
-                        }`}
+                        className="grid gap-4 px-6 py-2.5"
+                        style={{ gridTemplateColumns: `minmax(0, 2fr) repeat(${specColumns.length}, minmax(0, 1fr))` }}
                       >
-                        <dt className="text-sm leading-snug text-aggregate">{spec.label}</dt>
-                        <dd className="text-right font-mono text-sm font-medium text-warm">
-                          {spec.value}
-                        </dd>
+                        <span className="font-mono text-[0.65rem] uppercase leading-snug tracking-chip text-aggregate">
+                          {specLabelHeader}
+                        </span>
+                        {specColumns.map((col) => (
+                          <span
+                            key={col.key}
+                            className="text-center font-mono text-[0.65rem] uppercase leading-snug tracking-chip text-aggregate"
+                          >
+                            {col.header}
+                          </span>
+                        ))}
                       </div>
-                    ))}
+                    )}
+                    {specs.map((spec, i) =>
+                      'heading' in spec ? (
+                        <div
+                          key={spec.heading}
+                          className="border-t border-white/5 bg-ink/40 px-6 py-2.5"
+                        >
+                          <p
+                            className={`font-mono text-[0.7rem] font-semibold uppercase tracking-chip text-asphalt ${
+                              spec.center ? 'text-center' : ''
+                            }`}
+                          >
+                            {spec.heading}
+                          </p>
+                        </div>
+                      ) : (
+                        <div
+                          key={spec.label}
+                          className={`grid items-baseline gap-4 px-6 py-3.5 ${
+                            i > 0 ? 'border-t border-white/5' : ''
+                          }`}
+                          style={
+                            specColumns
+                              ? { gridTemplateColumns: `minmax(0, 2fr) repeat(${specColumns.length}, minmax(0, 1fr))` }
+                              : { gridTemplateColumns: '1fr auto' }
+                          }
+                        >
+                          <dt className="text-sm leading-snug text-aggregate">{spec.label}</dt>
+                          {specColumns ? (
+                            specColumns.map((col) => (
+                              <dd
+                                key={col.key}
+                                className="text-center font-mono text-sm font-medium text-warm"
+                              >
+                                {spec[col.key]}
+                              </dd>
+                            ))
+                          ) : (
+                            <dd className="text-right font-mono text-sm font-medium text-warm">
+                              {spec.value}
+                            </dd>
+                          )}
+                        </div>
+                      ),
+                    )}
                   </dl>
                 </div>
+
+                {extraSpecSections?.map((section) => (
+                  <div
+                    key={section.heading}
+                    className="mt-6 overflow-hidden rounded-2xl border border-ink-line bg-charcoal"
+                  >
+                    <div className="border-b border-white/5 px-6 py-4">
+                      <FigureLabel>{section.heading}</FigureLabel>
+                    </div>
+                    {section.layout === 'grid' ? (
+                      <dl>
+                        <div
+                          className="grid gap-4 px-6 py-2.5"
+                          style={{
+                            gridTemplateColumns: `repeat(${section.columns.length}, minmax(0, 1fr))`,
+                          }}
+                        >
+                          <span className="font-mono text-[0.65rem] uppercase leading-snug tracking-chip text-aggregate">
+                            {section.columns[0]}
+                          </span>
+                          {section.columns.slice(1).map((col) => (
+                            <span
+                              key={col}
+                              className="text-center font-mono text-[0.65rem] uppercase leading-snug tracking-chip text-aggregate"
+                            >
+                              {col}
+                            </span>
+                          ))}
+                        </div>
+                        {section.rows.map((row, i) => (
+                          <div
+                            key={row[0]}
+                            className={`grid items-baseline gap-4 px-6 py-3.5 ${
+                              i > 0 ? 'border-t border-white/5' : ''
+                            }`}
+                            style={{
+                              gridTemplateColumns: `repeat(${section.columns.length}, minmax(0, 1fr))`,
+                            }}
+                          >
+                            <dt className="text-sm leading-snug text-aggregate">{row[0]}</dt>
+                            {row.slice(1).map((cell, ci) => (
+                              <dd
+                                key={ci}
+                                className="text-center font-mono text-sm font-medium text-warm"
+                              >
+                                {cell}
+                              </dd>
+                            ))}
+                          </div>
+                        ))}
+                      </dl>
+                    ) : (
+                      <dl>
+                        {section.rows.map((row, i) => (
+                          <div
+                            key={row[0]}
+                            className={`px-6 py-4 ${i > 0 ? 'border-t border-white/5' : ''}`}
+                          >
+                            <p className="font-mono text-[0.6rem] uppercase tracking-chip text-aggregate">
+                              {section.columns[0]}
+                            </p>
+                            <dt className="mt-1 text-sm font-semibold leading-snug text-warm">
+                              {row[0]}
+                            </dt>
+                            <p className="mt-2.5 font-mono text-[0.6rem] uppercase tracking-chip text-aggregate">
+                              {section.columns[1]}
+                            </p>
+                            <dd className="mt-1 text-sm leading-relaxed text-warm/90">{row[1]}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
+                  </div>
+                ))}
+
                 {note && (
                   <p className="mt-4 px-1 text-sm italic leading-relaxed text-aggregate">
                     {note}

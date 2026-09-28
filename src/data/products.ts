@@ -3,7 +3,30 @@
 // (RS-1, SS-1, SS-2, CQS Emulsion, Patch Pro, plus the Bitumen grade pages). Do not paraphrase the
 // specs. Edit a product here and its /products/[slug] page updates automatically.
 
-export type Spec = { label: string; value: string }
+// A spec row is either a normal label line (with a plain `value`, and/or a
+// `procedure` / `requirement` for a test-report-style table) or a section
+// divider (e.g. "Tests on Residue") rendered as a heading row across the table.
+export type Spec =
+  | { label: string; value: string; procedure?: string; requirement?: string }
+  | { heading: string; center?: boolean }
+
+// Declares an extra column beyond the label, in left-to-right table order —
+// `key` picks which field of each Spec row that column reads. Products that
+// don't set `specColumns` keep the plain legacy label/value table.
+export type SpecColumn = { header: string; key: 'procedure' | 'requirement' | 'value' }
+
+// An independent, separately-headed table rendered below the main spec list —
+// for content that doesn't fit the single label/value(s) shape (e.g. a
+// long-form property/result table, or a differently-columned grading table).
+// `layout: 'grid'` right-aligns short values like the main spec table;
+// `layout: 'stacked'` (the default) stacks each row's cells as label + full-
+// width lines below it, for long free-text results.
+export type SpecSection = {
+  heading: string
+  columns: string[]
+  rows: string[][]
+  layout?: 'grid' | 'stacked'
+}
 
 export type ProductPage = {
   slug: string
@@ -16,6 +39,9 @@ export type ProductPage = {
   applications: string[]
   specRef: string // exact spec-table heading from the source (e.g. "Technical Specifications (IS 8887)")
   specs: Spec[]
+  specColumns?: SpecColumn[]
+  specLabelHeader?: string // header label for the leading (parameter/label) column, e.g. "Test Description"
+  extraSpecSections?: SpecSection[] // additional independent tables rendered below the main spec list
   note?: string // small italic note under the spec table
   image: string // expected image path; file may not exist yet (placeholder renders until it does)
   alt?: string // meaningful alt text for the product image; shared with the matching card
@@ -36,19 +62,107 @@ export const products: ProductPage[] = [
       'Highway and rural road maintenance where manual spraying is used',
     ],
     specRef: 'Technical Specifications (IS 8887)',
-    specs: [
-      { label: 'Residue on 600-micron sieve (% by mass, max)', value: '0.05' },
-      { label: 'Viscosity, Saybolt Furol at 50 °C (seconds)', value: '20–100' },
-      { label: 'Storage stability after 24 h (%, max)', value: '2' },
-      { label: 'Particle charge', value: 'Positive' },
-      { label: 'Coagulation at low temperature', value: 'Nil' },
-      { label: 'Residue by evaporation (%, min)', value: '60' },
-      { label: 'Penetration, 25 °C/100 g/5 s', value: '80–150' },
-      { label: 'Ductility, 27 °C (cm, min)', value: '50' },
-      { label: 'Solubility in trichloroethylene (%, min)', value: '98' },
+    specColumns: [
+      { header: 'Test Value for Sample', key: 'value' },
+      { header: 'Requirement as per IS 8887, 2018', key: 'requirement' },
     ],
-    image: '/product/05522981-41DC-43BB-B510-5594E81FDD2B.jpg',
-    alt: 'RS-1 rapid setting cationic bitumen emulsion drum on a road',
+    specs: [
+      {
+        label: 'Residue on IS Sieve of 600-micron size',
+        value: '0.02 %',
+        requirement: 'Less than 0.05 %',
+      },
+      {
+        label: 'Viscosity by Saybolt Furol Viscometer at 50°C (seconds)',
+        value: '32',
+        requirement: '20 – 100',
+      },
+      {
+        label: 'Storage stability after 24 hours, percent',
+        value: '1.5',
+        requirement: 'Less than 2',
+      },
+      {
+        label: 'Coagulation of emulsion at low temperature',
+        value: 'NIL',
+        requirement: 'NIL',
+      },
+      { label: 'Particle Charge', value: 'Positive', requirement: 'Positive' },
+      {
+        label: 'Miscibility with water',
+        value: 'No Coagulation',
+        requirement: 'No Coagulation',
+      },
+      { heading: 'Tests on Residue' },
+      {
+        label: 'Residue after evaporation',
+        value: '64.45 %',
+        requirement: '60 % (minimum)',
+      },
+      { label: 'Ductility at 27°C, cm', value: '90.5', requirement: '50 cm (Minimum)' },
+      { label: 'Penetration at 25°C', value: '87', requirement: '80 – 150' },
+      {
+        label: 'Solubility in Tri-chloro Ethylene',
+        value: '99.2 %',
+        requirement: '98 (Minimum)',
+      },
+    ],
+    image: '/product/Bitumen emulsion/rs-1.webp',
+    alt: 'Bitumen emulsion sprayer truck applying liquid emulsion to a road surface through multiple spray nozzles.',
+  },
+  {
+    slug: 'css-1',
+    code: 'CSS-1',
+    name: 'Water-Based Slow Setting Emulsion',
+    category: 'Cationic Bitumen Emulsion · Conforms to ASTM D2397',
+    tagline: 'Water-based slow-setting emulsion engineered for prime coat and deep base penetration.',
+    overview:
+      'CSS-1 is a water-based slow-setting emulsion designed for prime coat applications. Unlike rapid-setting emulsions, it is formulated to set more slowly, allowing better penetration into the base material. This slower setting time ensures the emulsion effectively bonds with the underlying surface, providing a strong foundation for subsequent layers of asphalt. The water-based nature offers advantages such as reduced environmental impact and improved handling properties.',
+    applications: [
+      'Prime coat over granular base courses',
+      'Fog seal and rejuvenating seal on aged pavements',
+      'Tack coat where a longer working/open time is needed',
+    ],
+    specRef: 'Technical Specifications (ASTM D2397)',
+    specColumns: [
+      { header: 'Test Value for Sample', key: 'value' },
+      { header: 'Requirement as per ASTM D2397', key: 'requirement' },
+    ],
+    specLabelHeader: 'Description',
+    specs: [
+      {
+        label: 'Viscosity by Saybolt Furol Viscometer at 25°C (seconds)',
+        value: '36',
+        requirement: '20–100',
+      },
+      {
+        label: 'Storage stability after 24 hours, percent',
+        value: '0.86',
+        requirement: '1 (maximum)',
+      },
+      { label: 'Particle Charge', value: 'Positive', requirement: 'Positive' },
+      {
+        label: 'Residue on IS Sieve of 600 micron size',
+        value: '0.04',
+        requirement: '0.1 % (Maximum)',
+      },
+      { label: 'Cement Mixing Test, %', value: '1.3', requirement: '2.0 (Maximum)' },
+      {
+        label: 'Oil distillate, by volume of emulsion Residue, %',
+        value: '62.9',
+        requirement: '57 (Minimum)',
+      },
+      { heading: 'Tests on Residue from distillation' },
+      { label: 'Ductility, cm at 25°C', value: '64 cm', requirement: '40 (Minimum)' },
+      { label: 'Penetration at 25°C', value: '119', requirement: '100–250' },
+      {
+        label: 'Solubility in Tri-chloro Ethylene',
+        value: '98.9 %',
+        requirement: '97.5 (Minimum)',
+      },
+    ],
+    image: '/product/Bitumen emulsion/css-1.webp',
+    alt: 'Bitumen emulsion sprayer truck spraying liquid emulsion on a highway, with fresh aggregate visible alongside.',
   },
   {
     slug: 'ss-1',
@@ -75,8 +189,8 @@ export const products: ProductPage[] = [
       { label: 'Ductility, 27 °C (cm, min)', value: '50' },
       { label: 'Solubility in trichloroethylene (%, min)', value: '98' },
     ],
-    image: '/product/486D2DA2-BF0A-40B4-90AE-F33D7091D067.jpg',
-    alt: 'SS-1 slow setting cationic bitumen emulsion drums on a road',
+    image: '/product/Bitumen emulsion/ss-1.webp',
+    alt: 'Workers and a tractor-drawn emulsion sprayer applying bitumen emulsion to a rural road.',
   },
   {
     slug: 'ss-2',
@@ -94,19 +208,151 @@ export const products: ProductPage[] = [
       'Slurry seal',
     ],
     specRef: 'Technical Specifications (IS 8887)',
-    specs: [
-      { label: 'Residue on 600-micron sieve (% by mass, max)', value: '0.05' },
-      { label: 'Viscosity, Saybolt Furol at 25 °C (seconds)', value: '30–150' },
-      { label: 'Storage stability after 24 h (%, max)', value: '2' },
-      { label: 'Particle charge', value: 'Positive' },
-      { label: 'Coagulation at low temperature', value: 'Nil' },
-      { label: 'Residue by evaporation (%, min)', value: '60' },
-      { label: 'Penetration, 25 °C/100 g/5 s', value: '60–120' },
-      { label: 'Ductility, 27 °C (cm, min)', value: '50' },
-      { label: 'Solubility in trichloroethylene (%, min)', value: '98' },
+    specColumns: [
+      { header: 'Procedure', key: 'procedure' },
+      { header: 'Specification', key: 'requirement' },
+      { header: 'Results', key: 'value' },
     ],
-    image: '/product/E0F03CFF-AF0D-441F-B643-2CF85402F510.jpg',
-    alt: 'SS-2 slow setting cationic bitumen emulsion drum on a road',
+    specLabelHeader: 'Test Description',
+    specs: [
+      {
+        label: 'Residue on 600 Micron IS sieve, Percent by mass, Max',
+        procedure: 'Annex B - IS 8887-2018',
+        requirement: 'Max 0.05 %',
+        value: '0.01 %',
+      },
+      {
+        label: 'Viscosity by Sayboltfurol viscometer, seconds, at 25°C',
+        procedure: 'IS 3117',
+        requirement: '30–150 Sec',
+        value: '33 Sec',
+      },
+      {
+        label: 'Coagulation of emulsion at low temperature',
+        procedure: 'Annex C - IS 8887-2018',
+        requirement: 'NIL',
+        value: 'Nil',
+      },
+      {
+        label: 'Storage Stability after 24 h, percent, Max',
+        procedure: 'Annex D - IS 8887-2018',
+        requirement: '2 %',
+        value: '1.24 %',
+      },
+      {
+        label: 'Particle Charge',
+        procedure: 'Annex E - IS 8887-2018',
+        requirement: 'Positive',
+        value: 'Positive',
+      },
+      {
+        label: 'Stability to mixing with cement (% Coagulation), Max',
+        procedure: 'Annex G - IS 8887-2018',
+        requirement: 'Max 2%',
+        value: '0.74 %',
+      },
+      {
+        label: 'Miscibility with water',
+        procedure: 'Annex H - IS 8887-2018',
+        requirement: 'No Coagulation',
+        value: 'No Coagulation',
+      },
+      {
+        label: 'Residue by evaporation, Percent Min',
+        procedure: 'Annex J - IS 8887-2018',
+        requirement: '> 60 %',
+        value: '61.20 %',
+      },
+      {
+        label: 'Penetration at 25°C/100g/5 Sec',
+        procedure: 'IS 1203',
+        requirement: '60–120 dmm',
+        value: '84 dmm',
+      },
+      {
+        label: 'Ductility 27°C C/cm, Min',
+        procedure: 'IS 1208',
+        requirement: '> 50 cm',
+        value: '72 cm',
+      },
+      {
+        label: 'Solubility in Trichloroethylene, percent by mass, Min',
+        procedure: 'IS 1216',
+        requirement: '> 98 %',
+        value: '99.10 %',
+      },
+    ],
+    image: '/images/prod-ss2-site.jpg',
+    alt: 'SS-2 slow setting emulsion road construction in progress, Behat, Uttar Pradesh',
+  },
+  {
+    slug: 'cme',
+    code: 'CME',
+    name: 'Cold Mix Emulsion',
+    category: 'Cationic Bitumen Emulsion · Conforms to IRC SP 100',
+    tagline: 'Cold-mix emulsion engineered for rural road construction at ambient temperature.',
+    overview:
+      'Cold Mix Emulsion (CME) is a slow-setting cationic bitumen emulsion formulated for cold-mix applications in rural road construction and maintenance. Conforming to IRC SP 100, it can be mixed with aggregate at ambient temperatures without heating equipment, making it ideal for remote sites with limited infrastructure.',
+    applications: [
+      'Rural road construction using cold-mix technology',
+      'Pothole repair and patch work without hot-mix plant',
+      'Surface dressing and fog seal on low-traffic roads',
+      'Road maintenance in areas with limited equipment access',
+    ],
+    specRef: 'Technical Specifications (IRC SP 100, 2014)',
+    specColumns: [
+      { header: 'Test Value for Sample', key: 'value' },
+      { header: 'Requirement as per IRC SP 100, 2014 for SS2', key: 'requirement' },
+    ],
+    specLabelHeader: 'Description',
+    specs: [
+      {
+        label: 'Residue on IS Sieve of 600 micron size',
+        value: '0.015',
+        requirement: '0.05 % (Maximum)',
+      },
+      {
+        label: 'Viscosity by Saybolt furol Viscometer at 25°C (seconds)',
+        value: '42',
+        requirement: '30–150',
+      },
+      {
+        label: 'Coagulation of emulsion at low Temperature',
+        value: 'NIL',
+        requirement: 'NIL',
+      },
+      {
+        label: 'Storage stability after 24 hours, percent',
+        value: '1.05',
+        requirement: '2 (maximum)',
+      },
+      { label: 'Particle Charge', value: 'Positive', requirement: 'Positive' },
+      {
+        label: 'Miscibility with water (coagulation)',
+        value: 'No coagulation',
+        requirement: 'No coagulation',
+      },
+      {
+        label: 'Stability to mixing with Cement, % coagulation',
+        value: '1.34',
+        requirement: '2.0 (Maximum)',
+      },
+      { heading: 'Tests on Residue from evaporation', center: true },
+      {
+        label: 'Residue by evaporation, %',
+        value: '66.12',
+        requirement: '60 (Minimum)',
+      },
+      { label: 'Penetration at 25°C', value: '77', requirement: '60–120' },
+      { label: 'Ductility, cm at 27°C', value: '98', requirement: '50 (Minimum)' },
+      {
+        label: 'Solubility in Tri-chloro Ethylene, %',
+        value: '99.1',
+        requirement: '98 (Minimum)',
+      },
+    ],
+    image: '/product/Bitumen emulsion/cme.webp',
+    alt: 'Freshly laid black cold-mix asphalt on a mountain road, with hillside and trees in the background.',
   },
   {
     slug: 'cqs-emulsion',
@@ -124,22 +370,61 @@ export const products: ProductPage[] = [
       'Fog seal (diluted 50% with water)',
     ],
     specRef: 'Technical Specifications (ASTM D2397 / ISSA A143, CQS-1h)',
+    specColumns: [
+      { header: 'Test Value for Sample', key: 'value' },
+      { header: 'Requirement as per IRC SP 81, 2008', key: 'requirement' },
+    ],
+    specLabelHeader: 'Description',
     specs: [
-      { label: 'Residual binder / residue by distillation (%, min)', value: '62' },
-      { label: 'Settlement & storage stability, 24 h (%, max)', value: '1' },
-      { label: 'Particle charge', value: 'Positive' },
-      { label: 'Workability / mix time (micro-surfacing)', value: '~180 seconds min' },
-      { label: 'Penetration of residue, 25 °C', value: '40–90' },
-      { label: 'Softening point of residue (°C, min)', value: '57' },
+      {
+        label: 'Residue on IS Sieve of 600 micron size',
+        value: '0.023',
+        requirement: '0.05 % (Maximum)',
+      },
+      {
+        label: 'Viscosity by Saybolt furol Viscometer at 25°C (seconds)',
+        value: '28',
+        requirement: '20 – 100',
+      },
+      {
+        label: 'Coagulation of emulsion at low Temperature',
+        value: 'NIL',
+        requirement: 'NIL',
+      },
+      {
+        label: 'Storage stability after 24 hours, percent',
+        value: '0.38',
+        requirement: '2 (maximum)',
+      },
+      { label: 'Particle Charge', value: 'Positive', requirement: 'Positive' },
+      { heading: 'Tests on Residue from evaporation', center: true },
+      {
+        label: 'Residue by evaporation, %',
+        value: '65.93',
+        requirement: '60 (Minimum)',
+      },
+      { label: 'Penetration at 25°C', value: '64', requirement: '40 – 100' },
+      { label: 'Ductility, cm at 27°C', value: '88', requirement: '50 (Minimum)' },
+      { label: 'Softening Point, °C', value: '64.8', requirement: '57 (Minimum)' },
+      {
+        label: 'Elastic Recovery in Ductilometer, %',
+        value: '70',
+        requirement: '50 (Minimum)',
+      },
+      {
+        label: 'Solubility in Tri-chloro Ethylene, %',
+        value: '98.7',
+        requirement: '97 (Minimum)',
+      },
     ],
     note: 'Micro-surfacing grades are typically polymer/latex modified per project specification.',
-    image: '/product/5830D47A-EEF8-43D2-9EE8-37E88C3E2742.jpg',
+    image: '/product/5830D47A-EEF8-43D2-9EE8-37E88C3E2742.webp',
     alt: 'CQS cationic quick-setting bitumen emulsion drum on a road',
   },
   {
     slug: 'patch-pro',
-    code: 'Patch Pro',
-    name: 'Ready-Mix Pothole Repair',
+    code: 'Roadtech Patch Pro',
+    name: 'Roadtech Patch Pro',
     category: 'Cold Mix Pothole Patching Material · As per IRC:116-2014',
     tagline: 'Permanent-feel pothole repair in minutes — pour, tamp, and open to traffic.',
     overview:
@@ -165,8 +450,42 @@ export const products: ProductPage[] = [
       { label: 'Packaging', value: 'Airtight double-laminated bags' },
       { label: 'Coverage', value: '~one 50 kg bag per 2/3 cu ft of pothole volume' },
     ],
-    image: '/product/515C8431-CDA9-4597-AB05-F2F89734A9A9.jpg',
-    alt: 'Patch Pro cold-mix pothole repair being poured into a pothole',
+    extraSpecSections: [
+      {
+        heading: 'Performance Tests — IRC:116-2014',
+        columns: ['Property', 'Test Result'],
+        layout: 'stacked',
+        rows: [
+          ['Residual bitumen content', '4.5 percent by weight of the mix'],
+          [
+            'Static immersion test, as per Appendix-I Part B of IRC 116, 2014',
+            'No stripping of aggregates was observed; coating was almost 100 percent',
+          ],
+          [
+            'Water resistant test, as per Appendix-I Part C of IRC 116, 2014',
+            'No stripping of aggregates was observed; coating was almost 100 percent',
+          ],
+          [
+            'Workability test, as per Appendix-I Part D of IRC 116, 2014',
+            'No lump formation was observed',
+          ],
+        ],
+      },
+      {
+        heading: 'Grading of the Mix',
+        columns: ['Sieve Size (mm)', 'Percent Passing', 'Recommended Range (IRC 116, 2014)'],
+        layout: 'grid',
+        rows: [
+          ['9.5', '100', '100'],
+          ['4.75', '85.93', '40 – 100'],
+          ['2.36', '16.94', '10 – 40'],
+          ['1.18', '3.11', '0 – 10'],
+          ['0.075', '1.35', '0 – 2'],
+        ],
+      },
+    ],
+    image: '/images/prod-patch-pro.jpg',
+    alt: 'Roadtech Patch Pro 25kg ready-mix pothole repair bag',
   },
   {
     slug: 'bitumen',
@@ -188,8 +507,8 @@ export const products: ProductPage[] = [
       { label: 'VG-30', value: 'For Moderate Temperature' },
       { label: 'VG-40', value: 'As per Demand' },
     ],
-    image: '/product/CAD7F274-C99D-444D-B351-493C5AD69267.jpg',
-    alt: 'Bitumen pouring from a plant spout',
+    image: '/images/prod-modified-bitumen-pour.jpg',
+    alt: 'Hot liquid bitumen pouring from a large industrial pipe, with a road roller visible in the blurred background.',
   },
   {
     slug: 'polymer-modified-bitumen',
@@ -214,8 +533,8 @@ export const products: ProductPage[] = [
       { label: 'PMB 76-22', value: 'As per customer needs' },
     ],
     note: 'PMB / CRMB in association with DRG Bitumen.',
-    image: '/product/EE17E8CD-A7D5-4250-AD96-215CBB923A38.jpg',
-    alt: 'Polymer modified bitumen drum on a pallet at a plant',
+    image: '/images/prod-pmb70-drum.png',
+    alt: 'Roadtech Asphalt Technologies branded blue drum at the plant yard.',
   },
   {
     slug: 'crumb-rubber-modified-bitumen',
@@ -238,7 +557,7 @@ export const products: ProductPage[] = [
       { label: 'CRMB 60', value: 'As per customer needs' },
     ],
     note: 'PMB / CRMB in association with DRG Bitumen.',
-    image: '/product/59A612DB-A677-4813-A089-393FED30EF06.jpg',
+    image: '/product/59A612DB-A677-4813-A089-393FED30EF06.webp',
     alt: 'Crumb rubber modified bitumen being blended in a vessel',
   },
 ]

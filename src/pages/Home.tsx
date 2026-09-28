@@ -19,8 +19,8 @@ export function Home() {
   return (
     <>
       {/* ---------------- HERO ---------------- */}
-      <section className="relative isolate flex min-h-[clamp(34rem,82vh,46rem)] items-center overflow-hidden bg-ink">
-        <HeroVideo src="/hero.mp4" />
+      <section className="relative isolate flex min-h-[clamp(34rem,82vh,46rem)] items-center overflow-hidden bg-ink lg:aspect-[1210/720] lg:min-h-0">
+        <HeroVideo src="/hero-loop.mp4" />
 
         <div className="absolute inset-0 -z-10 bg-hero-veil" />
         <div className="absolute inset-0 -z-10 bg-hero-veil-b sm:hidden" />
