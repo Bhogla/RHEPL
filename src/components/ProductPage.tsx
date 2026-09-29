@@ -1,27 +1,11 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getProduct, products, type ProductPage as ProductPageData } from '../data/products'
 import { NotFound } from '../pages/NotFound'
 import { Reveal } from './Reveal'
-import { DashRule, FigureLabel } from './ui'
+import { Seo } from './Seo'
+import { DashRule, FigureLabel, Trademarked } from './ui'
 import { ArrowRight, Image as ImageIcon } from './icons'
-
-/** Set the document <title> and meta description for the current product page. */
-function usePageMeta(title: string, description: string) {
-  useEffect(() => {
-    const previousTitle = document.title
-    document.title = title
-
-    const meta = document.querySelector('meta[name="description"]')
-    const previousDescription = meta?.getAttribute('content') ?? ''
-    if (meta) meta.setAttribute('content', description)
-
-    return () => {
-      document.title = previousTitle
-      if (meta) meta.setAttribute('content', previousDescription)
-    }
-  }, [title, description])
-}
 
 /**
  * Product image slot. Renders the real image at `src` with object-contain; if the
@@ -110,11 +94,11 @@ function RelatedStrip({ current }: { current: ProductPageData }) {
               >
                 {p.code !== p.name && (
                   <span className="font-mono text-xs uppercase tracking-chip text-asphalt">
-                    {p.code}
+                    <Trademarked>{p.code}</Trademarked>
                   </span>
                 )}
                 <span className="font-display text-xl font-semibold uppercase leading-tight text-warm">
-                  {p.name}
+                  <Trademarked>{p.name}</Trademarked>
                 </span>
                 <span className="mt-1 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-chip text-aggregate transition-colors group-hover:text-warm">
                   View product
@@ -133,14 +117,10 @@ export function ProductPage() {
   const { slug } = useParams()
   const product = getProduct(slug)
 
-  const titleName =
-    product && product.code !== product.name ? `${product.code} — ${product.name}` : product?.code
-  usePageMeta(
-    product ? `${titleName} | Roadtech Asphalt` : 'Product | Roadtech Asphalt',
-    product ? `${product.name}. ${product.tagline}` : '',
-  )
-
   if (!product) return <NotFound />
+
+  const titleName =
+    product.code !== product.name ? `${product.code} — ${product.name}` : product.code
 
   const {
     code,
@@ -162,6 +142,11 @@ export function ProductPage() {
 
   return (
     <>
+      <Seo
+        title={titleName}
+        description={`${product.name}. ${product.tagline}`}
+        path={`/products/${product.slug}`}
+      />
       {/* ---------------- HERO ---------------- */}
       <section className="border-b border-ink-line bg-ink">
         <div className="shell py-12 sm:py-16 lg:py-20">
@@ -181,7 +166,7 @@ export function ProductPage() {
               </li>
               <li aria-hidden className="text-aggregate/50">/</li>
               <li className="text-warm/90" aria-current="page">
-                {code}
+                <Trademarked>{code}</Trademarked>
               </li>
             </ol>
           </nav>
@@ -195,7 +180,7 @@ export function ProductPage() {
               </Reveal>
               <Reveal delay={80}>
                 <h1 className="mt-4 font-display text-display-lg font-bold uppercase leading-[0.95] text-warm">
-                  {code}
+                  <Trademarked>{code}</Trademarked>
                 </h1>
               </Reveal>
               {name !== code && (
@@ -409,7 +394,7 @@ export function ProductPage() {
             <div className="max-w-2xl">
               <FigureLabel>NEXT :: TALK TO THE TECHNICAL TEAM</FigureLabel>
               <h2 className="mt-4 font-display text-display-md font-semibold uppercase text-warm">
-                Need {code} for your project?
+                Need <Trademarked>{code}</Trademarked> for your project?
               </h2>
               <p className="mt-4 max-w-prose text-lg leading-relaxed text-aggregate">
                 Tell us your application and the standard you're working to — we'll confirm the

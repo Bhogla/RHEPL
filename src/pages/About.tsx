@@ -3,6 +3,7 @@ import { about } from '../data/content'
 import { Accordion } from '../components/Accordion'
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import { Seo } from '../components/Seo'
 import { Chip, DashRule, FigureLabel, SectionHeading } from '../components/ui'
 import { ArrowRight, Handshake, ShieldCheck, Users } from '../components/icons'
 import guptaPhoto from '../assets/directors/gupta.png'
@@ -98,6 +99,11 @@ const directors = [
 export function About() {
   return (
     <>
+      <Seo
+        title="About Us"
+        description="Incorporated in 2020, Roadtech Asphalt Technologies is an ISO-certified, MSME-registered manufacturer of bitumen emulsions and modified bitumen, backed by an IIA member technical and sales team serving highways and infrastructure projects across India."
+        path="/about"
+      />
       <PageHero
         figure={about.hero.figure}
         title={about.hero.heading}

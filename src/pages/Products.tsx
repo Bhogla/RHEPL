@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom'
 import { type Product, productTabs, specOnRequest } from '../data/content'
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import { Seo } from '../components/Seo'
 import { Tabs, type TabDef } from '../components/Tabs'
-import { Chip, ImagePlaceholder } from '../components/ui'
+import { Chip, ImagePlaceholder, Trademarked } from '../components/ui'
 import { ArrowRight } from '../components/icons'
 
 function CardInner({ product }: { product: Product }) {
@@ -24,7 +25,7 @@ function CardInner({ product }: { product: Product }) {
         )}
         <div className="absolute left-3 top-3">
           <Chip kind="accent" className="bg-white/85 backdrop-blur-sm">
-            {product.code}
+            <Trademarked>{product.code}</Trademarked>
           </Chip>
         </div>
       </div>
@@ -32,7 +33,7 @@ function CardInner({ product }: { product: Product }) {
       <div className="flex flex-1 flex-col gap-3 p-6">
         <div>
           <h3 className="font-display text-2xl font-semibold uppercase leading-none text-ink">
-            {product.name}
+            <Trademarked>{product.name}</Trademarked>
           </h3>
           {product.subtitle && (
             <p className="mt-2 font-mono text-xs uppercase tracking-chip text-asphalt">
@@ -110,6 +111,11 @@ export function Products() {
 
   return (
     <>
+      <Seo
+        title="Bituminous Products"
+        description="Emulsions, modified bitumen and additives engineered to IS and IRC standards — bitumen emulsions, PMB, CRMB, cold mix and specialty products for India's highways, expressways, runways and test tracks."
+        path="/products"
+      />
       <PageHero
         figure="FIG. 00 :: PRODUCT CATALOG"
         title="Value-added Bituminous Products"

@@ -1,5 +1,24 @@
-import type { ReactNode } from 'react'
+import { Fragment, type ReactNode } from 'react'
 import { Image as ImageIcon } from './icons'
+
+// ---- Trademarked: renders a "®" in the text as a proper superscript ---------
+// so registered-trademark product names don't grow the line height of the
+// chip/heading they sit in. A no-op passthrough for any string without "®".
+
+export function Trademarked({ children }: { children: string }) {
+  const parts = children.split('®')
+  if (parts.length === 1) return <>{children}</>
+  return (
+    <>
+      {parts.map((part, i) => (
+        <Fragment key={i}>
+          {part}
+          {i < parts.length - 1 && <sup className="text-[0.6em] align-super">®</sup>}
+        </Fragment>
+      ))}
+    </>
+  )
+}
 
 // ---- Chip: bordered monospace datasheet badge -------------------------------
 

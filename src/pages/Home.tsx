@@ -7,6 +7,7 @@ import { HeroVideo } from '../components/HeroVideo'
 import { LegacyCarousel } from '../components/LegacyCarousel'
 import { Reveal } from '../components/Reveal'
 import { Modal } from '../components/Modal'
+import { Seo } from '../components/Seo'
 import { Chip, DashRule, FigureLabel, SectionHeading } from '../components/ui'
 import { ArrowRight, Cpu, Factory, Flask } from '../components/icons'
 
@@ -18,6 +19,12 @@ export function Home() {
 
   return (
     <>
+      <Seo
+        title="Roadtech Asphalt Technologies — Bituminous Products & Road Solutions"
+        description="Roadtech Asphalt Technologies Pvt Ltd — manufacturer of bitumen emulsions, modified bitumen, cold mix products, and road-maintenance solutions for highways, expressways, runways and test tracks across India."
+        path="/"
+        suffix={false}
+      />
       {/* ---------------- HERO ---------------- */}
       <section className="relative isolate flex min-h-[clamp(34rem,82vh,46rem)] items-center overflow-hidden bg-ink lg:aspect-[1210/720] lg:min-h-0">
         <HeroVideo src="/hero-loop.mp4" />

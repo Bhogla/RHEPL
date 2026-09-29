@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from '../components/icons'
+import { Seo } from '../components/Seo'
 import { FigureLabel } from '../components/ui'
 
 export function NotFound() {
   return (
     <section className="flex min-h-[70vh] items-center bg-ink">
+      <Seo
+        title="Page Not Found"
+        description="The page you're looking for doesn't exist or has moved."
+        path="/404"
+        noindex
+      />
       <div className="shell">
         <FigureLabel>ERR :: 404 :: ROUTE NOT FOUND</FigureLabel>
         <h1 className="mt-6 font-display text-display-xl font-bold uppercase text-warm">

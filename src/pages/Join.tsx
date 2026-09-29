@@ -1,11 +1,17 @@
 import { contact, join } from '../data/content'
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import { Seo } from '../components/Seo'
 import { ArrowRight, Mail, WhatsApp } from '../components/icons'
 
 export function Join() {
   return (
     <>
+      <Seo
+        title="Careers & B2B Collaboration"
+        description="Join Roadtech Asphalt Technologies' growing technical and sales teams, or partner with us as a contractor, distributor or applicator on bituminous products and road solutions."
+        path="/join"
+      />
       <PageHero
         figure={join.figure}
         title={join.heading}

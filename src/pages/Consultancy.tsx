@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { consultancy } from '../data/content'
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import { Seo } from '../components/Seo'
 import { Tabs, type TabDef } from '../components/Tabs'
 import { Chip, DashRule } from '../components/ui'
 import {
@@ -161,6 +162,11 @@ export function Consultancy() {
 
   return (
     <>
+      <Seo
+        title="Technical Consultancy"
+        description="On-demand technical consultancy for road construction and maintenance — cold mix, hot mix and microsurfacing application support, plus on-site production of any grade of emulsion or modified bitumen at your plant."
+        path="/consultancy"
+      />
       <PageHero
         figure={consultancy.hero.figure}
         title={consultancy.hero.heading}

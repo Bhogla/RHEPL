@@ -356,13 +356,13 @@ export const products: ProductPage[] = [
   },
   {
     slug: 'cqs-emulsion',
-    code: 'CQS Emulsion',
+    code: 'CQS Emulsion®',
     name: 'Cationic Quick Set – 1h',
     category:
       'Cationic Bitumen Emulsion · Conforms to ASTM D2397 / AASHTO M208 (ISSA A143)',
     tagline: 'Quick-setting, high-viscosity emulsion built for slurry seals and micro-surfacing.',
     overview:
-      'CQS-1h is a quick-setting cationic emulsion with a hard residual binder ("h" grade), formulated specifically for slurry seal and micro-surfacing systems. In a purpose-built paver, it is mixed with aggregate, water and additives and laid in a single pass — breaking and curing fast enough that traffic can usually be restored shortly after application. It is a chocolate-brown, free-flowing liquid at ambient temperature with a high residual binder content for durable, hard-wearing surface films. Often supplied polymer- or latex-modified for demanding micro-surfacing work.',
+      'CQS Emulsion® (CQS-1h) is a quick-setting cationic emulsion with a hard residual binder ("h" grade), formulated specifically for slurry seal and micro-surfacing systems. In a purpose-built paver, it is mixed with aggregate, water and additives and laid in a single pass — breaking and curing fast enough that traffic can usually be restored shortly after application. It is a chocolate-brown, free-flowing liquid at ambient temperature with a high residual binder content for durable, hard-wearing surface films. Often supplied polymer- or latex-modified for demanding micro-surfacing work.',
     applications: [
       'Micro-surfacing (pavement preservation)',
       'Slurry seal',
@@ -418,8 +418,8 @@ export const products: ProductPage[] = [
       },
     ],
     note: 'Micro-surfacing grades are typically polymer/latex modified per project specification.',
-    image: '/product/5830D47A-EEF8-43D2-9EE8-37E88C3E2742.webp',
-    alt: 'CQS cationic quick-setting bitumen emulsion drum on a road',
+    image: '/product/cqs-emulsion.webp',
+    alt: 'Freshly applied microsurfacing emulsion on a highway lane, with a paving machine and road crew at work ahead.',
   },
   {
     slug: 'patch-pro',

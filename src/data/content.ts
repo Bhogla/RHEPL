@@ -381,14 +381,14 @@ export const productTabs: ProductTab[] = [
         alt: 'Freshly laid black cold-mix asphalt on a mountain road, with hillside and trees in the background.',
       },
       {
-        code: 'CQS',
-        name: 'Cationic Quick Setting Emulsion',
+        code: 'CQS®',
+        name: 'CQS Emulsion®',
         subtitle: 'For Microsurfacing Layer',
         slug: 'cqs-emulsion',
         description:
           'A cationic quick-setting emulsion designed for microsurfacing applications. Its positively charged particles (cations) allow better adhesion to the existing road surface, and its quick-setting properties ensure rapid bonding and minimal disruption to traffic flow during construction. Microsurfacing layers — a thin layer of asphalt, aggregate and polymer — improve road surfaces, enhance skid resistance and extend pavement life.',
-        image: '/product/5830D47A-EEF8-43D2-9EE8-37E88C3E2742.webp',
-        alt: 'CQS cationic quick-setting bitumen emulsion drum on a road',
+        image: '/product/cqs-emulsion.webp',
+        alt: 'Freshly applied microsurfacing emulsion on a highway lane, with a paving machine and road crew at work ahead.',
       },
       {
         code: 'PME',

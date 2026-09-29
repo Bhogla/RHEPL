@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import { contact } from '../data/content'
 import { PageHero } from '../components/PageHero'
 import { Reveal } from '../components/Reveal'
+import { Seo } from '../components/Seo'
 import { Chip, DashRule } from '../components/ui'
 import {
   ArrowRight,
@@ -86,6 +87,11 @@ export function Contact() {
 
   return (
     <>
+      <Seo
+        title="Contact Us"
+        description="Get in touch with Roadtech Asphalt Technologies' technical team — tell us your application and the IS/IRC standard you're working to, and we'll point you to the right grade and support."
+        path="/contact"
+      />
       <PageHero
         figure="FIG. 00 :: GET IN TOUCH"
         title="Talk to the Technical Team"
