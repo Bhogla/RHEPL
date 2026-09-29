@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { canonicalUrl } from '../lib/seo'
 
-const TITLE_SUFFIX = ' | Roadtech Asphalt Technologies'
+const TITLE_SUFFIX = ' | RHEPL'
 
 export function Seo({
   title,

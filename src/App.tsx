@@ -1,25 +1,23 @@
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
-import { Home } from './pages/Home'
-import { About } from './pages/About'
-import { Products } from './pages/Products'
-import { ProductPage } from './components/ProductPage'
-import { Consultancy } from './pages/Consultancy'
-import { Contact } from './pages/Contact'
-import { Join } from './pages/Join'
+import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
+import ServicesPage from './pages/ServicesPage'
+import ServiceDetailPage from './pages/ServiceDetailPage'
+import ProjectsPage from './pages/ProjectsPage'
+import ContactPage from './pages/ContactPage'
 import { NotFound } from './pages/NotFound'
 
 export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="products" element={<Products />} />
-        <Route path="products/:slug" element={<ProductPage />} />
-        <Route path="consultancy" element={<Consultancy />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="join" element={<Join />} />
+        <Route index element={<HomePage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="services" element={<ServicesPage />} />
+        <Route path="services/:slug" element={<ServiceDetailPage />} />
+        <Route path="projects" element={<ProjectsPage />} />
+        <Route path="contact" element={<ContactPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

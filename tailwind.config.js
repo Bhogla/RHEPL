@@ -1,23 +1,20 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
-        // Core brand tokens (committed — see DESIGN.md)
-        ink: '#0E0E10', // primary dark background
-        charcoal: '#1C1C1F', // secondary dark surface / cards on dark
-        warm: '#F5F4F0', // off-white content background
-        asphalt: '#E85D2D', // orange accent — CTAs, dividers, key figures (sparingly)
-        aggregate: '#8A8780', // muted gray — labels, borders, secondary text on dark
-        certgreen: '#2E7D5B', // certification / compliance badges only
-
-        // Derived helpers
-        'asphalt-deep': '#C8431A', // darker orange for hover/active fills
-        'ink-line': 'rgba(255, 255, 255, 0.10)', // hairline borders on dark surfaces
-        'warm-line': '#E2E0DA', // hairline borders on warm surfaces
-        'warm-ink': '#26262A', // body text on warm (kept ≥4.5:1, unlike aggregate)
-        'warm-mute': '#5C594F', // secondary text on warm that still passes AA
+        rhbg: '#FFFFFF',
+        rhsurface: '#F5F5F5',
+        rhborder: '#E0E0E0',
+        rhdark: '#1A1A1A',
+        rhgrey: '#6B6B6B',
+        rhorange: '#E87722',
+        rhorangeHover: '#C9640F',
+        rhorangeLight: '#FEF3E8',
+        rhwhite: '#FFFFFF',
+        rhsuccess: '#2E7D5B',
       },
       fontFamily: {
         display: ['"Barlow Condensed"', 'system-ui', 'sans-serif'],

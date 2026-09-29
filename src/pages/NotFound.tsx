@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight } from '../components/icons'
 import { Seo } from '../components/Seo'
-import { FigureLabel } from '../components/ui'
+import { ArrowRight } from '../components/icons'
 
 export function NotFound() {
   return (
-    <section className="flex min-h-[70vh] items-center bg-ink">
+    <section className="flex min-h-[70vh] items-center bg-rhbg">
       <Seo
         title="Page Not Found"
         description="The page you're looking for doesn't exist or has moved."
@@ -13,11 +12,10 @@ export function NotFound() {
         noindex
       />
       <div className="shell">
-        <FigureLabel>ERR :: 404 :: ROUTE NOT FOUND</FigureLabel>
-        <h1 className="mt-6 font-display text-display-xl font-bold uppercase text-warm">
+        <h1 className="font-display text-4xl font-bold uppercase text-rhdark">
           This stretch isn't paved yet
         </h1>
-        <p className="mt-5 max-w-prose text-lg leading-relaxed text-aggregate">
+        <p className="mt-5 max-w-prose text-lg leading-relaxed text-rhgrey">
           The page you're looking for doesn't exist or has moved. Let's get you back on a
           surface that does.
         </p>
@@ -25,12 +23,6 @@ export function NotFound() {
           <Link to="/" className="btn-primary">
             Back to Home
             <ArrowRight className="h-5 w-5" />
-          </Link>
-          <Link
-            to="/products"
-            className="inline-flex items-center gap-2 border border-ink-line px-6 py-3 font-display text-lg font-semibold uppercase tracking-wide text-warm transition-colors hover:border-asphalt/60 hover:text-asphalt"
-          >
-            View Products
           </Link>
         </div>
       </div>

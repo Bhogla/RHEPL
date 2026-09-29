@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://roadtech-asphalt.com'
+export const SITE_URL = 'https://www.rhepl.com'
 
 // Builds the canonical URL for a route. `path` must start with "/"; the
 // homepage keeps its trailing slash, every other route drops it.

@@ -4,12 +4,26 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
+
+    --color-bg: #FFFFFF;
+    --color-surface: #F5F5F5;
+    --color-border: #E0E0E0;
+    --color-text: #1A1A1A;
+    --color-text-muted: #6B6B6B;
+    --color-accent: #E87722;
+    --color-accent-light: #FEF3E8;
   }
 
   * {
-    /* hairline default border color so utility borders read on dark */
-    border-color: theme('colors.ink-line', rgba(255, 255, 255, 0.1));
+    /* hairline default border color so utility borders read on light surfaces */
+    border-color: theme('colors.rhborder');
+  }
+
+  html,
+  body {
+    background-color: #FFFFFF;
+    color: #1A1A1A;
   }
 
   html {
@@ -24,7 +38,7 @@
   }
 
   body {
-    @apply bg-ink font-sans text-warm antialiased;
+    @apply bg-rhbg font-sans text-rhdark antialiased;
     text-rendering: optimizeLegibility;
   }
 
@@ -40,7 +54,7 @@
 
   /* Visible keyboard focus on every interactive element */
   :where(a, button, input, textarea, select, [tabindex], summary):focus-visible {
-    outline: 2px solid theme('colors.asphalt');
+    outline: 2px solid theme('colors.rhorange');
     outline-offset: 2px;
     border-radius: 1px;
   }
@@ -51,7 +65,7 @@
   }
 
   ::selection {
-    background: theme('colors.asphalt');
+    background: theme('colors.rhorange');
     color: white;
   }
 }
@@ -63,8 +77,8 @@
   .dash-rule {
     background-image: repeating-linear-gradient(
       to right,
-      theme('colors.asphalt') 0,
-      theme('colors.asphalt') 18px,
+      theme('colors.rhorange') 0,
+      theme('colors.rhorange') 18px,
       transparent 18px,
       transparent 30px
     );
@@ -83,18 +97,6 @@
     width: 100%;
   }
 
-  /* Portrait dissolve — cutout figures merge into the dark field instead of
-     sitting in a visible box. Bottom fades into the road line; sides fade so
-     the object-cover crop never shows a hard edge. */
-  .portrait-blend {
-    -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%),
-      linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to bottom, #000 80%, transparent 100%),
-      linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
-    mask-composite: intersect;
-  }
-
   /* Container */
   .shell {
     width: 100%;
@@ -105,62 +107,15 @@
 
   /* Primary CTA */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-asphalt px-6 py-3 font-display text-lg font-semibold uppercase tracking-wide text-white transition-colors duration-200 ease-out;
+    @apply inline-flex items-center justify-center gap-2 bg-rhorange px-6 py-3 font-display text-lg font-semibold uppercase tracking-wide text-white transition-colors duration-200 ease-out;
   }
   .btn-primary:hover {
-    @apply bg-asphalt-deep;
+    @apply bg-rhorangeHover;
   }
 
   /* Secondary action: text link with icon (not a competing button) */
   .link-action {
     @apply inline-flex items-center gap-2 font-mono text-sm uppercase tracking-chip transition-colors duration-200 ease-out;
-  }
-
-  /* ---- Associate-brands logo marquee ---- */
-  /* Edge fade + clipped viewport for the scrolling logo strip. */
-  .brand-marquee {
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      black 8%,
-      black 92%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(to right, transparent 0, black 8%, black 92%, transparent 100%);
-  }
-  /* Track holds the logo list twice, back-to-back, so a -50% shift loops seamlessly. */
-  .brand-marquee__track {
-    display: flex;
-    width: max-content;
-    animation: brand-scroll 45s linear infinite;
-  }
-  .brand-marquee__track:hover {
-    animation-play-state: paused;
-  }
-  @keyframes brand-scroll {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-  /* Reduced motion: no auto-scroll — fall back to a single, manually scrollable row. */
-  @media (prefers-reduced-motion: reduce) {
-    .brand-marquee {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      -webkit-mask-image: none;
-      mask-image: none;
-    }
-    .brand-marquee__track {
-      width: auto;
-      animation: none;
-    }
-    .brand-marquee__track [data-marquee-clone] {
-      display: none;
-    }
   }
 }
 
@@ -172,56 +127,8 @@
     background-image: linear-gradient(
       to right,
       transparent,
-      theme('colors.warm-line'),
+      theme('colors.rhborder'),
       transparent
     );
-  }
-}
-
-/* ---- Scroll reveal: visible by default, enhanced when motion is allowed ---- */
-.reveal {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .reveal.reveal-armed {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  .reveal.reveal-in {
-    opacity: 1;
-    transform: none;
-    transition:
-      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-}
-
-/* ---- Modal open animation: only when motion is allowed ---- */
-@keyframes modal-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes modal-rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .modal-backdrop-in {
-    animation: modal-fade-in 200ms ease-out both;
-  }
-  .modal-panel-in {
-    animation: modal-rise-in 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
