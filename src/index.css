@@ -7,10 +7,10 @@
     color-scheme: light;
 
     --color-bg: #FFFFFF;
-    --color-surface: #F5F5F5;
-    --color-border: #E0E0E0;
-    --color-text: #1A1A1A;
-    --color-text-muted: #6B6B6B;
+    --color-surface: #F5F4F0;
+    --color-border: #E6E4DE;
+    --color-text: #0E0E10;
+    --color-text-muted: #5B5B60;
     --color-accent: #E87722;
     --color-accent-light: #FEF3E8;
   }
@@ -23,23 +23,26 @@
   html,
   body {
     background-color: #FFFFFF;
-    color: #1A1A1A;
+    color: #0E0E10;
   }
 
   html {
-    scroll-behavior: smooth;
+    /* Native scroll only — no scroll-behavior: smooth here, so anchors and
+       sticky/fixed headers behave predictably across browsers. */
     -webkit-text-size-adjust: 100%;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
   }
 
   body {
     @apply bg-rhbg font-sans text-rhdark antialiased;
+    font-size: 16px;
+    line-height: 1.65;
     text-rendering: optimizeLegibility;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 17px;
+    }
   }
 
   h1,

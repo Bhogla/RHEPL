@@ -4,6 +4,7 @@ export interface Service {
   name: string;
   tagline: string;
   chip: string;
+  image: string;
   description: string;
   longDescription: string;
   benefits: string[];
@@ -18,6 +19,7 @@ export const services: Service[] = [
     name: 'Microsurfacing',
     tagline: 'Cold-mix slurry technology for durable, skid-resistant road surfaces',
     chip: 'Preventive Treatment',
+    image: '/images/svc-microsurfacing-site.jpg',
     description: 'Microsurfacing is a cold-mix paving system using polymer-modified bitumen emulsion, crushed aggregate, mineral filler, water and additives. It restores pavement surface while improving skid resistance and waterproofing the road structure.',
     longDescription: 'RHEPL deploys microsurfacing as a cost-effective preventive maintenance treatment for pavements showing early signs of oxidation, ravelling and minor cracking. Unlike conventional hot-mix overlays, microsurfacing uses no heat—making it safer, faster and environmentally friendlier. A specialized self-propelled machine precisely meters and mixes all components in a continuous process, placing a uniform thin layer (6–13 mm) that opens to traffic within 1–2 hours. RHEPL uses only polymer-modified bitumen emulsions to ensure superior adhesion, rutting resistance and extended service life.',
     benefits: [
@@ -50,6 +52,7 @@ export const services: Service[] = [
     name: 'Rut Filling & Profile Correction',
     tagline: 'Precision cold-mix treatment to eliminate rutting and restore road profile',
     chip: 'Corrective Treatment',
+    image: '/images/svc-rut-filling.png',
     description: 'RHEPL uses specially designed rut-filling microsurfacing equipment to fill longitudinal ruts and correct cross-sectional profiles on distressed pavements, restoring ride quality and eliminating hydroplaning risks.',
     longDescription: 'Rutting — permanent deformation of the pavement surface — is one of the most common and dangerous defects on high-traffic roads. Water ponds in ruts, causing hydroplaning and aquaplaning at highway speeds. RHEPL\'s rut-filling operation uses a specialised box screed attached to the microsurfacing machine to precisely fill ruts up to 40 mm deep in a single pass. The polymer-modified slurry is levelled flush with the adjacent pavement, then a conventional microsurfacing blanket coat is applied over the entire lane to provide a uniform, skid-resistant final surface.',
     benefits: [
@@ -81,6 +84,7 @@ export const services: Service[] = [
     name: 'Road Marking',
     tagline: 'High-visibility thermoplastic and paint markings for safe road geometry',
     chip: 'Safety Marking',
+    image: '/images/svc-road-marking.png',
     description: 'RHEPL provides comprehensive road marking services using thermoplastic paint, cold-plastic and conventional road marking paint, with glass bead application for retroreflectivity and night-time visibility.',
     longDescription: 'Clear, durable road markings are a critical component of road safety. RHEPL\'s road marking division is equipped with truck-mounted airless spray machines, thermoplastic screed applicators and hand-operated machines for all types of markings. We work to IRC:35 standards and can deliver lane lines, edge lines, centre lines, arrows, legends, zebra crossings, stop lines, chevrons and rumble strips. All thermoplastic markings receive a double application of glass beads — pre-mixed into the compound and drop-on after application — ensuring strong initial and retained retroreflectivity for safe night driving.',
     benefits: [
@@ -114,6 +118,7 @@ export const services: Service[] = [
     name: 'Pavement Preservation',
     tagline: 'Integrated preventive and corrective treatments to maximise pavement life',
     chip: 'Life Extension',
+    image: '/images/svc-bitumen-design.jpg',
     description: 'RHEPL\'s pavement preservation programmes combine condition assessment, preventive sealing and corrective treatments into a planned maintenance strategy that maximises the service life of road assets.',
     longDescription: 'Pavement preservation is a proactive asset management philosophy: applying the right treatment at the right time to keep good roads in good condition, rather than waiting for expensive reconstruction. RHEPL partners with road agencies and project developers to design multi-year preservation programmes that analyse pavement condition index (PCI) data, prioritise network sections, select appropriate treatments (fog seals, crack seals, slurry seals, microsurfacing, cape seals) and schedule interventions to achieve the lowest life-cycle cost. Our in-house pavement engineers use IITPAVE and other tools for structural analysis and treatment design.',
     benefits: [

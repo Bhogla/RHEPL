@@ -5,6 +5,7 @@ import AboutPage from './pages/AboutPage'
 import ServicesPage from './pages/ServicesPage'
 import ServiceDetailPage from './pages/ServiceDetailPage'
 import ProjectsPage from './pages/ProjectsPage'
+import JoinPage from './pages/JoinPage'
 import ContactPage from './pages/ContactPage'
 import { NotFound } from './pages/NotFound'
 
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="services" element={<ServicesPage />} />
         <Route path="services/:slug" element={<ServiceDetailPage />} />
         <Route path="projects" element={<ProjectsPage />} />
+        <Route path="join" element={<JoinPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>

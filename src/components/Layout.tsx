@@ -22,7 +22,8 @@ export function Layout() {
       </a>
       <ScrollToTop />
       <Navbar />
-      <main id="main" className="flex-1">
+      {/* pt-20 offsets the fixed Navbar (h-20) so page content isn't hidden underneath */}
+      <main id="main" className="flex-1 pt-20">
         <Outlet />
       </main>
       <Footer />
